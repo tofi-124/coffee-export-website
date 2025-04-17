@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ImageLoader.css';
 
-function ImageLoader({ src, alt, sizes = "100vw", mobileSrc }) {
+function ImageLoader({ src, alt, sizes = "(max-width: 768px) 100vw, 50vw", mobileSrc, className = "" }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Check for mobile screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -14,11 +25,16 @@ function ImageLoader({ src, alt, sizes = "100vw", mobileSrc }) {
     setIsLoaded(true);
   };
 
-  // Create srcset if mobileSrc is provided
-  const srcSet = mobileSrc ? `${mobileSrc} 480w, ${src} 800w` : null;
+  // Create srcset if mobileSrc is provided, otherwise use src for both
+  const srcSet = mobileSrc 
+    ? `${mobileSrc} 480w, ${src} 800w` 
+    : `${src} 800w`;
+
+  // Use mobileSrc for smaller screens if provided
+  const imgSrc = (isMobile && mobileSrc) ? mobileSrc : src;
 
   return (
-    <div className={`image-loader ${isLoaded ? 'loaded' : ''}`}>
+    <div className={`image-loader ${isLoaded ? 'loaded' : ''} ${className}`}>
       {!isLoaded && (
         <div className="image-placeholder">
           <div className="loading-icon">
@@ -28,9 +44,9 @@ function ImageLoader({ src, alt, sizes = "100vw", mobileSrc }) {
       )}
       {!isError ? (
         <img
-          src={src}
+          src={imgSrc}
           srcSet={srcSet}
-          sizes={srcSet ? sizes : null}
+          sizes={sizes}
           alt={alt}
           onLoad={handleLoad}
           onError={handleError}

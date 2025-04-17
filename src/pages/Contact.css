@@ -110,6 +110,10 @@
   background-color: var(--background-light);
   font-size: 1rem;
   transition: all 0.3s ease;
+  /* Enhanced for mobile */
+  -webkit-appearance: none; /* Remove default iOS styling */
+  appearance: none;
+  min-height: var(--min-touch-target); /* Minimum touch target size */
 }
 
 .form-group input:focus,
@@ -144,6 +148,25 @@
   background-position: right 1rem center;
   background-size: 1rem;
   padding-right: 2.5rem;
+}
+
+.form-group input[type="file"] {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  background-color: transparent;
+  border: 1px dashed var(--border-color);
+  cursor: pointer;
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button {
+  background-color: var(--accent-color);
+  color: var(--dark-brown);
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  min-height: var(--min-touch-target); /* Minimum touch target size */
 }
 
 .error-message {
@@ -460,11 +483,41 @@
   .contact-form {
     order: 1;
   }
+  
+  /* Better submit button for touchscreens */
+  .btn-submit,
+  .btn-primary,
+  .submit-btn {
+    min-height: var(--min-touch-target);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.8rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Prevent zoom on iOS when focusing on inputs */
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 16px;
+    padding: 0.8rem 1rem;
+  }
+  
+  /* Improved select input for mobile */
+  .form-group select {
+    background-position: right 0.8rem center;
+    background-size: 0.8rem;
+    padding-right: 2rem;
+  }
 }
 
 @media (max-width: 480px) {
   .contact-form {
     padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Lighter shadow for mobile */
   }
 
   .info-item {
@@ -474,6 +527,7 @@
   .form-container {
     padding: var(--card-padding-mobile);
     margin: 0 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Lighter shadow for mobile */
   }
 
   .contact-info-grid {
@@ -486,6 +540,21 @@
 
   .contact-content {
     padding: var(--section-padding-mobile);
+  }
+  
+  /* Stack form buttons vertically on small screens */
+  .form-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* More visible messages on mobile */
+  .error-message,
+  .success-message {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    margin: 1rem 0;
   }
 }
 
@@ -504,6 +573,7 @@
     width: 100%;
     margin-top: 1.5rem;
     padding: 0.8rem;
+    font-size: 1rem;
   }
 
   .contact-info-item {
@@ -516,6 +586,19 @@
   
   .contact-hero h1 {
     font-size: 1.8rem;
+  }
+  
+  /* Reduce loading animations for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    .submit-button.submitting::after {
+      animation: none;
+      opacity: 0.5;
+    }
+    
+    .submit-btn.loading::after {
+      animation: none;
+      opacity: 0.5;
+    }
   }
 }
 

@@ -7,7 +7,7 @@
 
 .hero {
   position: relative;
-  height: 100vh;
+  height: 90vh; /* Reduced from 100vh for better mobile display */
   min-height: 600px;
   display: flex;
   align-items: center;
@@ -276,6 +276,7 @@
 @media (max-width: 968px) {
   .hero {
     margin-top: -106px; /* Adjusted for smaller header + announcement */
+    height: 80vh; /* Shorter on tablets */
   }
   
   .section {
@@ -292,6 +293,19 @@
     width: 100%;
     max-width: 300px;
   }
+  
+  /* Reduce animation delays on mobile for performance */
+  .hero-content h1 {
+    animation-delay: 0.1s;
+  }
+  
+  .hero-content p {
+    animation-delay: 0.2s;
+  }
+  
+  .hero-buttons {
+    animation-delay: 0.3s;
+  }
 }
 
 @media (max-width: 768px) {
@@ -299,6 +313,7 @@
   .features {
     grid-template-columns: 1fr;
     padding: 0 1.5rem;
+    gap: var(--grid-gap-medium);
   }
 
   .hero-content {
@@ -321,6 +336,19 @@
   .cta-section .content {
     padding: 0 1.5rem;
   }
+  
+  /* Optimize hover effects for touch devices */
+  .grade-overlay {
+    opacity: 0.7; /* Always slightly visible on mobile */
+  }
+  
+  .grade-card:hover {
+    transform: translateY(-3px); /* Reduced movement on mobile */
+  }
+  
+  .feature:hover {
+    transform: translateY(-3px); /* Reduced movement on mobile */
+  }
 }
 
 @media (max-width: 480px) {
@@ -332,7 +360,8 @@
   }
   
   .hero {
-    min-height: 500px; /* Reduce minimum height on small screens */
+    min-height: 450px; /* Reduce minimum height on small screens */
+    height: 70vh; /* Shorter on mobile */
   }
   
   .hero-content h1 {
@@ -344,13 +373,29 @@
     font-size: 1rem;
     margin-bottom: 1.5rem;
   }
+  
+  /* Make grade cards more touch-friendly */
+  .grade-card {
+    position: relative;
+  }
+  
+  /* Adjust animation timing for better mobile performance */
+  .hero-content > * {
+    animation-duration: 0.6s;
+  }
+  
+  /* Remove hover effects for small screens */
+  .grade-card:hover .grade-image img {
+    transform: none;
+  }
 }
 
 /* Extra small devices */
 @media (max-width: 400px) {
   .hero {
     margin-top: -100px; /* Further adjust for very small screens */
-    min-height: 450px;
+    min-height: 400px;
+    height: 65vh;
   }
   
   .hero-content h1 {
@@ -363,6 +408,24 @@
   
   .grade-info {
     padding: 1.2rem;
+  }
+  
+  /* Remove animations to improve performance on very small devices */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-content > * {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    
+    .grade-card:hover,
+    .feature:hover {
+      transform: none;
+    }
+    
+    .grade-card:hover .grade-image img {
+      transform: none;
+    }
   }
 }
 

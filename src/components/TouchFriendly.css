@@ -1,0 +1,28 @@
+/* TouchFriendly Component Styles */
+.touch-friendly {
+  position: relative;
+  -webkit-tap-highlight-color: transparent; /* Removes default mobile tap highlight */
+  touch-action: manipulation; /* Improves touch response */
+  cursor: pointer;
+}
+
+.touch-friendly.touching {
+  opacity: 0.8; /* Subtle visual feedback when being touched */
+  transform: scale(0.98); /* Slight scale effect on touch */
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+/* Remove visual effect if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .touch-friendly.touching {
+    transform: none;
+    transition: none;
+    opacity: 0.9;
+  }
+}
+
+/* Fix for iOS double-tap issues */
+.touch-friendly * {
+  -webkit-touch-callout: none; /* Prevent iOS callout on long press */
+  user-select: none; /* Prevent text selection on touch elements */
+}

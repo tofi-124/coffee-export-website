@@ -1,9 +1,11 @@
-.image-container {
+.image-loader {
   position: relative;
   overflow: hidden;
   background-color: var(--background-light);
   width: 100%;
   height: 100%;
+  min-height: 200px;
+  max-height: 80vh; /* Limit height on mobile views */
 }
 
 .image-placeholder {
@@ -18,9 +20,13 @@
     var(--background-light) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
-.lazy-image {
+.image-loader img {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,67 +35,86 @@
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.5s ease;
-  z-index: 1;
+  z-index: 2;
 }
 
-.lazy-image.loaded {
+.image-loader.loaded img.fade-in {
   opacity: 1;
 }
 
-.error-container {
+.image-error {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: var(--background-light);
   color: var(--text-color);
   padding: 1rem;
   text-align: center;
-  z-index: 2;
+  z-index: 3;
 }
 
-.retry-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
+.loading-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coffee-bean {
+  width: 24px;
+  height: 24px;
   background-color: var(--accent-color);
-  color: var(--dark-brown);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.retry-button:hover {
-  background-color: var(--dark-brown);
-  color: var(--light-text);
-  transform: translateY(-2px);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+  animation: rotate 1.5s infinite ease;
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .image-placeholder {
-    animation: none;
-    background: var(--background-light);
+@keyframes rotate {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(405deg); }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .image-loader {
+    min-height: 160px; /* Smaller minimum height on mobile */
   }
   
-  .lazy-image {
-    transition: none;
+  /* Remove animations on low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    .image-placeholder {
+      animation: none;
+      background: var(--background-light);
+    }
+    
+    .coffee-bean {
+      animation: none;
+    }
+    
+    .image-loader img {
+      transition: none;
+    }
   }
-
-  .retry-button:hover {
-    transform: none;
+  
+  /* Use smaller loading indicators on mobile */
+  .loading-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .coffee-bean {
+    width: 18px;
+    height: 18px;
   }
 }

@@ -16,6 +16,7 @@
   --grid-gap-large: 3rem;
   --grid-gap-medium: 2rem;
   --grid-gap-small: 1.5rem;
+  --grid-gap-xs: 1rem; /* New extra small grid gap for mobile */
   --section-padding-desktop: 6rem 0;
   --section-padding-tablet: 4rem 0;
   --section-padding-mobile: 3rem 0;
@@ -133,6 +134,9 @@ img {
   font-size: 0.95rem;
   text-decoration: none;
   text-align: center;
+  min-height: var(--min-touch-target);
+  /* Mobile tap states */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .btn-primary {
@@ -259,6 +263,18 @@ img {
   background-color: var(--background-light);
   font-size: 1rem;
   transition: all 0.3s ease;
+  /* Touch-friendly for mobile */
+  min-height: var(--min-touch-target);
+  -webkit-appearance: none; /* Remove iOS default styling */
+  appearance: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(196, 155, 102, 0.2);
 }
 
 .card {
@@ -358,6 +374,18 @@ img {
 
   .section {
     padding: var(--section-padding-xs);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 16px; /* Prevents iOS zoom on input */
+    padding: 0.875rem;
+  }
+  
+  .btn {
+    width: 100%; /* Full-width buttons on small screens */
+    padding: 0.875rem 1rem;
   }
 }
 
