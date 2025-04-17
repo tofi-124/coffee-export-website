@@ -489,6 +489,36 @@
   }
 }
 
+/* Extra small devices */
+@media (max-width: 400px) {
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 0.8rem;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+
+  .btn-submit,
+  .btn-primary,
+  .submit-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+  }
+
+  .contact-info-item {
+    padding: 1rem;
+  }
+  
+  .form-container {
+    padding: 1rem;
+  }
+  
+  .contact-hero h1 {
+    font-size: 1.8rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .contact-info-item {
     transition: none;

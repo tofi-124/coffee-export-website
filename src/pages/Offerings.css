@@ -54,6 +54,10 @@
   transition: all 0.3s ease;
   font-weight: 500;
   min-width: 120px;
+  min-height: 44px; /* Minimum touch target height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filter-btn:hover,

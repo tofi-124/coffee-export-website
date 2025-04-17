@@ -91,10 +91,6 @@ function About() {
                 <h3>Sustainability</h3>
                 <p>Sustainability is woven into everything we do. We invest in environmental sustainability by supporting organic farming practices, biodiversity conservation, and training farmers in climate-resilient techniques. We also champion social sustainability through reinvestment in farmer communities.</p>
               </div>
-              <div className="value-card hover-lift">
-                <h3>Radical Transparency</h3>
-                <p>We provide end-to-end visibility on our coffees with rich descriptions of origins, processing methods, and the people behind each lot. We maintain meticulous records to trace any bag of coffee back to the exact harvest and lot.</p>
-              </div>
             </div>
           </div>
 

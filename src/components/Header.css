@@ -149,6 +149,11 @@
 @media (max-width: 968px) {
   .mobile-menu-button {
     display: block;
+    width: 44px;  /* Increased touch target */
+    height: 44px; /* Minimum recommended touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-menu {
@@ -162,6 +167,8 @@
     padding: var(--card-padding-tablet);
     transition: right 0.3s ease;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling if menu is too tall */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
   .header.scrolled .nav-menu {
@@ -178,6 +185,11 @@
     text-align: center;
     padding: 1rem 0;
     font-size: 1.1rem;
+    min-height: 44px; /* Minimum touch target height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.25rem 0; /* Add spacing between nav items */
   }
 
   .mobile-menu-overlay {

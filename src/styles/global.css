@@ -19,12 +19,18 @@
   --section-padding-desktop: 6rem 0;
   --section-padding-tablet: 4rem 0;
   --section-padding-mobile: 3rem 0;
+  --section-padding-xs: 2rem 0; /* Extra small screens section padding */
   --card-padding-desktop: 2.5rem;
   --card-padding-tablet: 2rem;
   --card-padding-mobile: 1.5rem;
+  --card-padding-xs: 1rem; /* Extra small screens card padding */
   --border-radius-large: 12px;
   --border-radius-medium: 8px;
   --border-radius-small: 4px;
+  --min-touch-target: 44px; /* Minimum touch target size for mobile */
+  --container-padding-desktop: 0 2rem;
+  --container-padding-tablet: 0 1.5rem;
+  --container-padding-mobile: 0 1rem;
 }
 
 * {
@@ -280,7 +286,7 @@ img {
 
 @media (max-width: 968px) {
   :root {
-    --container-padding: 0 1.5rem;
+    --container-padding: var(--container-padding-tablet);
   }
 
   .grid-3,
@@ -303,7 +309,7 @@ img {
   }
 
   .container {
-    padding: 0 1.5rem;
+    padding: var(--container-padding-mobile);
   }
 
   .grid-2,
@@ -335,7 +341,7 @@ img {
 
 @media (max-width: 480px) {
   :root {
-    --container-padding: 0 1rem;
+    --container-padding: var(--container-padding-mobile);
   }
 
   html {
@@ -343,10 +349,28 @@ img {
   }
 
   .container {
-    padding: 0 1rem;
+    padding: var(--container-padding-mobile);
   }
 
   .card-content {
     padding: var(--card-padding-mobile);
+  }
+
+  .section {
+    padding: var(--section-padding-xs);
+  }
+}
+
+@media (max-width: 320px) {
+  .btn {
+    min-height: var(--min-touch-target);
+  }
+
+  .card-content {
+    padding: var(--card-padding-xs);
+  }
+
+  .section {
+    padding: var(--section-padding-xs);
   }
 }
