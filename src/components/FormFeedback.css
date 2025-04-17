@@ -1,0 +1,104 @@
+.feedback-container {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideFadeIn 0.3s ease forwards;
+  width: 100%;
+}
+
+.success {
+  background-color: rgba(72, 187, 120, 0.1);
+  border: 1px solid rgba(72, 187, 120, 0.2);
+  color: #2f855a;
+}
+
+.error {
+  background-color: rgba(245, 101, 101, 0.1);
+  border: 1px solid rgba(245, 101, 101, 0.2);
+  color: #c53030;
+}
+
+.warning {
+  background-color: rgba(236, 201, 75, 0.1);
+  border: 1px solid rgba(236, 201, 75, 0.2);
+  color: #b7791f;
+}
+
+.feedback-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-message {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  opacity: 1;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback-container.exit {
+  animation: slideFadeOut 0.3s ease forwards;
+}
+
+@keyframes slideFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-container {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .feedback-container.exit {
+    animation: none;
+    display: none;
+  }
+
+  .close-button {
+    transition: none;
+  }
+}

@@ -1,0 +1,392 @@
+.wholesale-page {
+  padding-top: 80px;
+  min-height: 100vh;
+}
+
+.wholesale-hero {
+  height: 60vh;
+  min-height: 500px;
+  position: relative;
+  color: var(--light-text);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wholesale-hero img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.wholesale-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.wholesale-hero .content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.wholesale-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: var(--light-text);
+}
+
+.wholesale-hero p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.wholesale-intro {
+  padding: 6rem 0;
+  background-color: var(--background-light);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.intro-content h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  color: var(--dark-brown);
+}
+
+.intro-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.benefits-list li {
+  padding-left: 2rem;
+  position: relative;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.benefits-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.intro-image {
+  height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.intro-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quality-standards {
+  padding: 6rem 0;
+  background-color: var(--light-text);
+}
+
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.standard-card {
+  background: var(--light-text);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.standard-card:hover {
+  transform: translateY(-5px);
+}
+
+.standard-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--dark-brown);
+}
+
+.standard-card p {
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.wholesale-form-section {
+  padding: 6rem 0;
+  background-color: var(--background-light);
+}
+
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: var(--light-text);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark-brown);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--background-light);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(196, 155, 102, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.checkbox-group {
+  margin: 2rem 0;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-submit {
+  width: 100%;
+  max-width: 300px;
+  margin: 2rem auto 0;
+  display: block;
+  padding: 1rem;
+  font-size: 1.1rem;
+  background-color: var(--accent-color);
+  color: var(--dark-brown);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: var(--dark-brown);
+  color: var(--light-text);
+  transform: translateY(-2px);
+}
+
+.btn-submit.submitting {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.benefits-section {
+  padding: 4rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  padding: 0 2rem;
+}
+
+.benefits-card {
+  background: var(--light-text);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.contact-offices {
+  padding: 4rem 0;
+  background-color: var(--background-light);
+}
+
+.offices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.office-card {
+  background: var(--light-text);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.office-card:hover {
+  transform: translateY(-5px);
+}
+
+.office-card h3 {
+  color: var(--dark-brown);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.office-card p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.office-card strong {
+  color: var(--dark-brown);
+}
+
+@media (max-width: 968px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .intro-image {
+    height: 400px;
+    order: -1;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wholesale-hero {
+    min-height: 400px;
+  }
+
+  .wholesale-hero .content {
+    padding: 0 1.5rem;
+  }
+
+  .wholesale-intro {
+    padding: 4rem 0;
+  }
+
+  .form-container {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .benefits-card {
+    padding: 1.5rem;
+  }
+
+  .offices-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .wholesale-hero {
+    min-height: 350px;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .intro-image {
+    height: 300px;
+  }
+}
