@@ -183,8 +183,73 @@ function About() {
           <div className="team-section">
             <h2>Our Commitment</h2>
             <p>Our company's focus on quality, transparency, and sustainability is not a mere marketing slogan – it's the foundation of how we operate daily. By holding ourselves to these high standards, we aim to build lasting relationships with discerning coffee buyers and conscientious partners.</p>
-            <p>We want our customers to feel as good about doing business with us as they do about brewing our coffee. Whether you're a micro-roaster looking for a standout Yirgacheffe, or a specialty importer seeking a reliable Ethiopian supplier, you can trust that our coffees – and our business practices – represent the very best of Ethiopia.</p>
           </div>
+
+          {/* New Testimonials Section */}
+          <div className="testimonials-section">
+            <h2>What Our Partners Say</h2>
+            <div className="testimonials-grid">
+              <div className="testimonial-card hover-lift">
+                <div className="quotation-mark">"</div>
+                <p className="testimonial-text">Their Yirgacheffe lots consistently showcase the floral and citrus notes we look for in our single-origin offerings. Ethio Coffee's commitment to quality is evident in every shipment.</p>
+                <div className="testimonial-source">
+                  <h4>Oakwood Coffee Roasters</h4>
+                  <p>Toronto, Canada</p>
+                </div>
+              </div>
+              
+              <div className="testimonial-card hover-lift">
+                <div className="quotation-mark">"</div>
+                <p className="testimonial-text">Working directly with Ethio Coffee has transformed our Ethiopian offerings. The traceability they provide adds tremendous value to our brand story, and the coffee quality speaks for itself.</p>
+                <div className="testimonial-source">
+                  <h4>Archer's Specialty Coffee</h4>
+                  <p>Melbourne, Australia</p>
+                </div>
+              </div>
+              
+              <div className="testimonial-card hover-lift">
+                <div className="quotation-mark">"</div>
+                <p className="testimonial-text">The natural processed Sidamo we source through Ethio Coffee has become our fastest-selling single origin. Their export logistics are smooth and professional, making them a reliable partner.</p>
+                <div className="testimonial-source">
+                  <h4>Greenway Coffee Co.</h4>
+                  <p>Berlin, Germany</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* New Awards Section */}
+          <div className="awards-section">
+            <h2>Awards & Recognition</h2>
+            <p className="section-subtitle">Our commitment to quality has earned recognition across the industry</p>
+            
+            <div className="awards-grid">
+              <div className="award-card hover-lift">
+                <div className="award-year">2024</div>
+                <h3>Excellence in Ethiopian Coffee Exports</h3>
+                <p>Ethiopian Coffee Exporters Association</p>
+              </div>
+              
+              <div className="award-card hover-lift">
+                <div className="award-year">2023</div>
+                <h3>Sustainability Initiative Award</h3>
+                <p>Specialty Coffee Association</p>
+              </div>
+              
+              <div className="award-card hover-lift">
+                <div className="award-year">2022</div>
+                <h3>Best Ethiopian Specialty Coffee Exporter</h3>
+                <p>African Fine Coffees Association</p>
+              </div>
+              
+              <div className="award-card hover-lift">
+                <div className="award-year">2021</div>
+                <h3>Cup of Excellence - Ethiopia</h3>
+                <p>Alliance for Coffee Excellence</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

@@ -50,16 +50,27 @@ function Home() {
 
   return (
     <div className="home">
-      <section className="hero full-width-section">
-        <div className="hero-background parallax" data-speed="0.5">
-          <ImageLoader src="/images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
+      {/* New elegant intro section */}
+      <section className="intro-section">
+        <div className="intro-background parallax" data-speed="0.3">
+          <ImageLoader src="/images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Farm" />
         </div>
-        <div className="hero-content">
-          <h1>Bringing Ethiopia's Finest Coffee to the World</h1>
-          <p>Quality, Transparency, Sustainability - Direct export of premium Ethiopian coffee from the birthplace of Arabica</p>
-          <div className="hero-buttons">
-            <Link to="/wholesale" className="btn btn-primary">Request Export Quote</Link>
-            <Link to="/regions" className="btn btn-outline">Explore Coffee Origins</Link>
+        <div className="intro-content">
+          <div className="intro-text-container">
+            <h1 className="intro-title">Elevating Ethiopian Coffee</h1>
+            <p className="intro-subtitle">Direct trade with reliable supply chain</p>
+          </div>
+        </div>
+      </section>
+      
+      {/* Minimal About Intro Section */}
+      <section className="about-intro-section section">
+        <div className="container">
+          <div className="about-intro-content">
+            <p className="intro-paragraph">
+              It all started with a passion for Ethiopian coffee and sustainable farming. Now Ethio Coffee Import and Export is a major coffee exporting company in Ethiopia, exporting premium green coffee directly from our partner farms and affiliated farmers. We export various coffee from all major growing regions, from conventional to specialty with years of experience in the coffee business.
+            </p>
+            <Link to="/about" className="btn-text-link">Get To Know Us More <span className="arrow">→</span></Link>
           </div>
         </div>
       </section>
@@ -109,6 +120,81 @@ function Home() {
               <h3>Sustainability</h3>
               <p>Supporting sustainable farming practices and farmer communities</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="feature-section">
+        <div className="container">
+          <h2 className="section-title">Why Choose Us</h2>
+          <div className="feature-grid">
+            <div className="feature fade-on-scroll">
+              <h3>Quality</h3>
+              <p>Specialty grade coffee with cupping scores of 85+ points</p>
+            </div>
+            <div className="feature fade-on-scroll">
+              <h3>Traceability</h3>
+              <p>Full traceability from farm to cup with detailed documentation</p>
+            </div>
+            <div className="feature fade-on-scroll">
+              <h3>Sustainability</h3>
+              <p>Supporting sustainable farming practices and farmer communities</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="stats-section section">
+        <div className="container">
+          <h2 className="section-title">Our Impact by Numbers</h2>
+          <div className="stats-grid">
+            <div className="stat-item fade-on-scroll">
+              <div className="stat-number">35+</div>
+              <div className="stat-label">Washing Stations</div>
+            </div>
+            <div className="stat-item fade-on-scroll">
+              <div className="stat-number">1,500+</div>
+              <div className="stat-label">Partner Farmers</div>
+            </div>
+            <div className="stat-item fade-on-scroll">
+              <div className="stat-number">8</div>
+              <div className="stat-label">Coffee Regions</div>
+            </div>
+            <div className="stat-item fade-on-scroll">
+              <div className="stat-number">6</div>
+              <div className="stat-label">Processing Mills</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New Video Section */}
+      <section className="video-section section light-section">
+        <div className="container">
+          <h2 className="section-title">Experience Our Coffee Journey</h2>
+          <p className="section-subtitle">From Ethiopia's highlands to your roastery</p>
+          
+          <div className="video-container fade-on-scroll">
+            {/* Replace with your actual video embed code or use a video player component */}
+            <div className="video-placeholder">
+              <div className="placeholder-overlay">
+                <button className="play-button">
+                  <i className="fas fa-play"></i>
+                </button>
+                <p>Our Coffee Story</p>
+              </div>
+              <ImageLoader src="/images/products/coffee-plantation.jpg" alt="Coffee Plantation Video Thumbnail" />
+            </div>
+            {/* When implementing the actual video, you can use:
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+              title="Ethiopian Coffee Journey" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen>
+            </iframe> */}
           </div>
         </div>
       </section>
