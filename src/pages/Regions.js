@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ImageLoader from '../components/ImageLoader';
 import './Regions.css';
 
@@ -11,7 +12,10 @@ const regionData = [
     processing: 'Washed, Natural',
     certifications: 'Organic, Fair Trade',
     image: '/images/products/yirgacheffe-natural.jpg',
-    long_description: 'Located in the southern part of Ethiopia, Yirgacheffe is perhaps the most famous coffee region in Ethiopia. The region\'s high altitude (1,750-2,200 meters), rich soil, and ideal climate contribute to the development of the coffee\'s distinctive qualities. When processed using the washed method, Yirgacheffe coffees are known for their clean, bright profile with floral and citrus notes. Natural processed Yirgacheffe offers deep, fruity flavors with wine-like characteristics.'
+    long_description: 'Located in the southern part of Ethiopia, Yirgacheffe is perhaps the most famous coffee region in Ethiopia. The region\'s high altitude (1,750-2,200 meters), rich soil, and ideal climate contribute to the development of the coffee\'s distinctive qualities. When processed using the washed method, Yirgacheffe coffees are known for their clean, bright profile with floral and citrus notes. Natural processed Yirgacheffe offers deep, fruity flavors with wine-like characteristics.',
+    altitude: '1,750-2,200m',
+    harvest: 'October - January',
+    soil: 'Red-brown fertile loam with volcanic origins'
   },
   {
     id: 'sidamo',
@@ -21,7 +25,10 @@ const regionData = [
     processing: 'Washed, Natural',
     certifications: 'Organic, Rainforest Alliance',
     image: '/images/products/sidamo-washed.jpg',
-    long_description: 'Sidamo (also spelled Sidama) covers a large area in southern Ethiopia. The region produces coffee at elevations between 1,550 and 2,200 meters. Sidamo coffees are known for their balanced profile, offering sweet berry notes (particularly blueberry in natural processed coffees), with medium body and pleasant acidity. The washed coffees from this region tend to have citrus and stone fruit notes with excellent clarity, while natural processed coffees exhibit deeper fruit tones and wine-like characteristics.'
+    long_description: 'Sidamo (also spelled Sidama) covers a large area in southern Ethiopia. The region produces coffee at elevations between 1,550 and 2,200 meters. Sidamo coffees are known for their balanced profile, offering sweet berry notes (particularly blueberry in natural processed coffees), with medium body and pleasant acidity. The washed coffees from this region tend to have citrus and stone fruit notes with excellent clarity, while natural processed coffees exhibit deeper fruit tones and wine-like characteristics.',
+    altitude: '1,550-2,200m',
+    harvest: 'October - January',
+    soil: 'Red to brownish fertile clay loam'
   },
   {
     id: 'guji',
@@ -31,7 +38,10 @@ const regionData = [
     processing: 'Washed, Natural, Honey',
     certifications: 'Organic',
     image: '/images/products/coffee-cherries.jpg',
-    long_description: 'Once considered part of Sidamo, Guji has established itself as a distinct coffee-producing region with its own unique profile. Coffees from Guji are grown at very high elevations (1,850-2,200 meters) resulting in dense beans with concentrated flavors. The region produces exceptionally clean and distinctive coffees with bright acidity and complex fruity and floral notes. Natural processed Guji coffees are particularly sought after for their intense fruit-forward profiles with notes of tropical fruit, berries, and honey sweetness.'
+    long_description: 'Once considered part of Sidamo, Guji has established itself as a distinct coffee-producing region with its own unique profile. Coffees from Guji are grown at very high elevations (1,850-2,200 meters) resulting in dense beans with concentrated flavors. The region produces exceptionally clean and distinctive coffees with bright acidity and complex fruity and floral notes. Natural processed Guji coffees are particularly sought after for their intense fruit-forward profiles with notes of tropical fruit, berries, and honey sweetness.',
+    altitude: '1,850-2,200m',
+    harvest: 'November - January',
+    soil: 'Fertile, red volcanic loam'
   },
   {
     id: 'harrar',
@@ -41,7 +51,10 @@ const regionData = [
     processing: 'Natural',
     certifications: 'Organic',
     image: '/images/products/coffee-beans-roasted.jpg',
-    long_description: 'Harrar is a historic coffee-producing region in eastern Ethiopia. Unlike the southern regions, Harrar coffees are exclusively natural processed due to water limitations. These coffees are known for their distinctive winey quality, intense berry notes (particularly blueberry), heavy body, and good acidity. The unique dry-processing methods used in Harrar, perfected over centuries, contribute to the coffee\'s signature wine and fruit characteristics. These coffees are often described as rustic, intense, and complex.'
+    long_description: 'Harrar is a historic coffee-producing region in eastern Ethiopia. Unlike the southern regions, Harrar coffees are exclusively natural processed due to water limitations. These coffees are known for their distinctive winey quality, intense berry notes (particularly blueberry), heavy body, and good acidity. The unique dry-processing methods used in Harrar, perfected over centuries, contribute to the coffee\'s signature wine and fruit characteristics. These coffees are often described as rustic, intense, and complex.',
+    altitude: '1,500-2,100m',
+    harvest: 'October - February',
+    soil: 'Rocky, sandy, dry soil'
   },
   {
     id: 'limu',
@@ -51,7 +64,10 @@ const regionData = [
     processing: 'Washed',
     certifications: 'Fair Trade',
     image: '/images/products/coffee-pouring.jpg',
-    long_description: 'Limu produces predominantly washed coffees known for their balanced, clean profile. These beans grow at altitudes ranging from 1,400 to 2,000 meters above sea level. Limu coffees typically feature a mild, pleasant acidity with distinctive wine and spice notes balanced by a pleasant sweetness. The body is usually medium, making these coffees versatile for various brewing methods. Limu is often considered one of the more approachable Ethiopian coffees while still maintaining the distinctive Ethiopian character.'
+    long_description: 'Limu produces predominantly washed coffees known for their balanced, clean profile. These beans grow at altitudes ranging from 1,400 to 2,000 meters above sea level. Limu coffees typically feature a mild, pleasant acidity with distinctive wine and spice notes balanced by a pleasant sweetness. The body is usually medium, making these coffees versatile for various brewing methods. Limu is often considered one of the more approachable Ethiopian coffees while still maintaining the distinctive Ethiopian character.',
+    altitude: '1,400-2,000m',
+    harvest: 'September - December',
+    soil: 'Red-brown clay loam'
   },
   {
     id: 'kaffa',
@@ -61,20 +77,38 @@ const regionData = [
     processing: 'Washed, Natural',
     certifications: 'Organic, Fair Trade',
     image: '/images/products/cupping-session.jpg',
-    long_description: 'Kaffa (also spelled Kefa) is often cited as the original birthplace of Arabica coffee, where coffee trees have grown wild for centuries. The region\'s centuries-old forests create a perfect natural environment for coffee cultivation. Kaffa coffees exhibit a complex profile with medium body, bright acidity, and chocolate-berry notes often accompanied by subtle herbal undertones. The wild coffee varieties found in Kaffa\'s forests contribute to the region\'s unique flavor profiles, often described as having a distinctive "forest-like" quality.'
+    long_description: 'Kaffa (also spelled Kefa) is often cited as the original birthplace of Arabica coffee, where coffee trees have grown wild for centuries. The region\'s centuries-old forests create a perfect natural environment for coffee cultivation. Kaffa coffees exhibit a complex profile with medium body, bright acidity, and chocolate-berry notes often accompanied by subtle herbal undertones. The wild coffee varieties found in Kaffa\'s forests contribute to the region\'s unique flavor profiles, often described as having a distinctive "forest-like" quality.',
+    altitude: '1,500-2,100m',
+    harvest: 'October - January',
+    soil: 'Dark fertile forest soil with high organic content'
   }
 ];
 
 function Regions() {
   const [activeRegion, setActiveRegion] = useState('yirgacheffe');
+  
+  useEffect(() => {
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
+    
+    return () => observer.disconnect();
+  }, []);
 
   const handleRegionClick = (regionId) => {
     setActiveRegion(regionId);
     
-    // Scroll to details section
+    // Scroll to details section smoothly
     const detailsElement = document.getElementById('region-details');
     if (detailsElement) {
-      detailsElement.scrollIntoView({ behavior: 'smooth' });
+      detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -82,35 +116,53 @@ function Regions() {
 
   return (
     <div className="regions-page">
+      {/* Hero Section */}
       <section className="regions-hero">
+        <div className="hero-background">
+          <ImageLoader src="/images/products/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
+        </div>
         <div className="container">
-          <h1>Ethiopian Coffee Regions</h1>
-          <p>Discover the diverse origins of Ethiopia's exceptional coffees</p>
+          <div className="hero-content">
+            <span className="hero-tagline">TERROIR & TRADITION</span>
+            <h1>Ethiopian Coffee Regions</h1>
+            <p>Discover the diverse origins and distinctive profiles of the world's finest coffee terroirs</p>
+          </div>
         </div>
       </section>
 
-      <section className="regions-intro">
+      {/* Intro Section */}
+      <section className="intro-section fade-on-scroll">
         <div className="container">
-          <p className="intro-text">
-            Ethiopia, the birthplace of coffee, features diverse growing regions each yielding distinctly different flavor profiles. The country's various microclimates, altitudes, and processing traditions contribute to an unparalleled range of coffee characteristics. Explore our offerings from Ethiopia's primary coffee regions below.
-          </p>
+          <div className="intro-content">
+            <h2 className="section-title line-after text-center">The Birthplace of Coffee</h2>
+            <p className="intro-text">
+              Ethiopia, the ancestral home of Arabica coffee, offers an unparalleled diversity of flavor profiles thanks to its varied microclimates, altitudes, and processing traditions. Unlike coffees from other origins, Ethiopian beans are still largely produced from indigenous heirloom varieties growing in their native environment, resulting in unmatched complexity and distinction. Each region imparts its own unique characteristics to the coffee, creating a rich tapestry of flavors that has captivated coffee connoisseurs worldwide for centuries.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Visual Region Gallery */}
+      {/* Regions Gallery */}
       <section className="regions-gallery">
         <div className="container">
           <div className="regions-grid">
             {regionData.map(region => (
               <div 
                 key={region.id} 
-                className={`region-card ${activeRegion === region.id ? 'active' : ''}`}
+                className={`region-card fade-on-scroll ${activeRegion === region.id ? 'active' : ''}`}
                 onClick={() => handleRegionClick(region.id)}
               >
                 <div className="region-image">
                   <ImageLoader src={region.image} alt={`${region.name} Coffee`} />
-                  <div className="region-overlay">
+                </div>
+                <div className="region-overlay">
+                  <div className="region-preview-content">
                     <h3>{region.name}</h3>
+                    <div className="region-badge">{region.altitude}</div>
+                    <p className="region-preview-desc">{region.description}</p>
+                    <button className="region-view-btn">
+                      {activeRegion === region.id ? 'Currently Viewing' : 'View Region'}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -122,59 +174,133 @@ function Regions() {
       {/* Region Details Section */}
       <section id="region-details" className="region-details">
         <div className="container">
-          <div className="region-content">
+          <div className="region-content fade-on-scroll">
             <div className="region-info">
-              <h2>{selectedRegion.name}</h2>
+              <div className="region-title-area">
+                <span className="region-subtitle">REGION PROFILE</span>
+                <h2>{selectedRegion.name}</h2>
+                <div className="region-divider"></div>
+              </div>
+              
               <p className="region-description">{selectedRegion.long_description}</p>
               
               <div className="region-specs">
-                <div className="spec-item">
-                  <h4>Flavor Notes</h4>
-                  <p>{selectedRegion.flavor}</p>
-                </div>
-                <div className="spec-item">
-                  <h4>Processing Methods</h4>
-                  <p>{selectedRegion.processing}</p>
-                </div>
-                <div className="spec-item">
-                  <h4>Available Certifications</h4>
-                  <p>{selectedRegion.certifications}</p>
+                <div className="spec-grid">
+                  <div className="spec-item">
+                    <h4>Flavor Notes</h4>
+                    <p>{selectedRegion.flavor}</p>
+                  </div>
+                  <div className="spec-item">
+                    <h4>Processing Methods</h4>
+                    <p>{selectedRegion.processing}</p>
+                  </div>
+                  <div className="spec-item">
+                    <h4>Altitude</h4>
+                    <p>{selectedRegion.altitude}</p>
+                  </div>
+                  <div className="spec-item">
+                    <h4>Harvest Period</h4>
+                    <p>{selectedRegion.harvest}</p>
+                  </div>
+                  <div className="spec-item">
+                    <h4>Soil Type</h4>
+                    <p>{selectedRegion.soil}</p>
+                  </div>
+                  <div className="spec-item">
+                    <h4>Available Certifications</h4>
+                    <p>{selectedRegion.certifications}</p>
+                  </div>
                 </div>
               </div>
+              
+              <Link to="/offerings" className="region-cta btn-secondary">
+                View Coffee Offerings
+              </Link>
             </div>
             
             <div className="region-image-large">
               <ImageLoader src={selectedRegion.image} alt={`${selectedRegion.name} Coffee Region`} />
+              <div className="region-image-caption">
+                <p>{selectedRegion.name} coffee region, Ethiopia</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Map Section */}
       <section className="regions-map-section">
         <div className="container">
-          <h2>Coffee Growing Regions Map</h2>
-          <p className="section-subtitle">Ethiopia's diverse coffee terroirs create unique flavor profiles</p>
+          <div className="section-header fade-on-scroll">
+            <h2 className="section-title line-after text-center">Geography of Flavor</h2>
+            <p className="section-subtitle">Ethiopia's varied landscapes and climates create distinct coffee characteristics across regions</p>
+          </div>
           
           <div className="map-container fade-on-scroll">
             <img 
-              src="/images/regions/ethiopia-coffee-map.jpg" 
+              src="/images/products/coffee-plantation.jpg" 
               alt="Ethiopian Coffee Regions Map" 
-              onError={(e) => {e.target.src = '/images/products/coffee-plantation.jpg'; e.target.alt = "Coffee Regions Placeholder"}}
             />
             <div className="map-caption">
-              <p>Ethiopia's main coffee growing regions highlighted by production areas</p>
+              <p>Ethiopia's main coffee growing regions span diverse altitudes and climates</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="cta-section">
+      {/* Features Section */}
+      <section className="features-section">
         <div className="container">
-          <h2>Ready to source from these regions?</h2>
-          <p>Connect with our export specialists to discuss your specific requirements.</p>
-          <div className="cta-buttons">
-            <a href="/wholesale" className="btn btn-primary">Request Export Quote</a>
-            <a href="/contact" className="btn btn-secondary">Contact Us</a>
+          <div className="features-grid">
+            <div className="feature-card fade-on-scroll">
+              <div className="feature-icon">
+                <i className="fas fa-mountain"></i>
+              </div>
+              <h3>High Altitude Growing</h3>
+              <p>Ethiopia's coffee grows at elevations between 1,400-2,200 meters, resulting in dense, flavor-rich beans with complex acidity.</p>
+            </div>
+            
+            <div className="feature-card fade-on-scroll">
+              <div className="feature-icon">
+                <i className="fas fa-seedling"></i>
+              </div>
+              <h3>Indigenous Varieties</h3>
+              <p>Over 10,000 heirloom coffee varieties exist across Ethiopia, offering an unmatched genetic diversity not found anywhere else.</p>
+            </div>
+            
+            <div className="feature-card fade-on-scroll">
+              <div className="feature-icon">
+                <i className="fas fa-cloud-sun"></i>
+              </div>
+              <h3>Perfect Microclimate</h3>
+              <p>Consistent temperatures, seasonal rainfall, and optimal sun exposure create ideal coffee growing conditions.</p>
+            </div>
+            
+            <div className="feature-card fade-on-scroll">
+              <div className="feature-icon">
+                <i className="fas fa-hands"></i>
+              </div>
+              <h3>Traditional Methods</h3>
+              <p>Centuries of coffee farming expertise, with traditional processing methods passed down through generations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta-section">
+        <div className="cta-background">
+          <ImageLoader src="/images/products/coffee-pouring.jpg" alt="Coffee Pouring" />
+        </div>
+        <div className="cta-overlay"></div>
+        <div className="container">
+          <div className="cta-content">
+            <h2>Ready to Source Ethiopian Coffee?</h2>
+            <p>Connect with our export specialists to discuss your specific requirements, volume needs, and shipping logistics</p>
+            <div className="cta-buttons">
+              <Link to="/wholesale" className="btn btn-primary">Request Export Quote</Link>
+              <Link to="/contact" className="btn btn-secondary">Contact Our Team</Link>
+            </div>
           </div>
         </div>
       </section>
