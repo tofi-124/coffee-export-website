@@ -1,210 +1,286 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ImageLoader from '../components/ImageLoader';
 import './Home.css';
 
-const exportGrades = [
+const coffeeOfferings = [
   {
-    name: 'Premium Specialty Coffee',
-    description: 'High-grade specialty coffees (Grade 1 & 2) with exceptional flavor profiles, direct from partner farms',
-    specs: 'Screen size 15+, 85+ cupping points, 0-3 defects',
-    image: '/images/products/coffee-beans-roasted.jpg'
+    id: 1,
+    name: 'Specialty Grade Coffee',
+    description: 'Ethiopian coffees with 85+ cupping scores, exceptional flavor complexity, and direct traceability',
+    specs: 'Grades 1 & 2 | 85+ SCA points',
+    image: 'images/products/coffee-beans-roasted.jpg'
   },
   {
-    name: 'Single Origin Varieties',
-    description: 'Traceable coffee from specific regions like Yirgacheffe, Sidamo, Harrar, Guji and more',
-    specs: 'Full traceability and origin documentation',
-    image: '/images/products/coffee-cherries.jpg'
+    id: 2,
+    name: 'Regional Varieties',
+    description: 'Distinct coffees from Ethiopia\'s premier growing regions with unique flavor profiles',
+    specs: 'Yirgacheffe | Sidamo | Guji | Harrar',
+    image: 'images/products/coffee-cherries.jpg'
   },
   {
-    name: 'Sustainable Partnerships',
-    description: 'Long-term relationships with quality-focused roasters through transparent and ethical sourcing',
-    specs: 'Customizable specifications and certifications',
-    image: '/images/products/sidamo-washed.jpg'
+    id: 3,
+    name: 'Processing Methods',
+    description: 'Natural, washed, and honey processed coffees available to suit your specific requirements',
+    specs: 'Natural | Washed | Honey | Experimental',
+    image: 'images/products/sidamo-washed.jpg'
+  }
+];
+
+const stats = [
+  { number: '35+', label: 'Washing Stations' },
+  { number: '1,500+', label: 'Partner Farmers' },
+  { number: '12', label: 'Export Markets' },
+  { number: '8', label: 'Growing Regions' }
+];
+
+const testimonials = [
+  {
+    quote: "Consistently delivers exceptional quality coffees with a level of traceability that our customers value. A trusted partner for our premium coffee program.",
+    author: "James Hoffman",
+    company: "Nordic Coffee Roasters",
+    location: "Stockholm"
+  },
+  {
+    quote: "Their natural Sidamo has become our bestselling single origin. The export logistics are smooth and professional.",
+    author: "Sarah Chen",
+    company: "Greenway Coffee Co.",
+    location: "Melbourne"
   }
 ];
 
 function Home() {
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const parallaxElements = document.querySelectorAll('.parallax');
-      parallaxElements.forEach(element => {
-        const speed = element.dataset.speed || 0.5;
-        element.style.transform = `translateY(${scrolled * speed}px)`;
-      });
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-      const fadeElements = document.querySelectorAll('.fade-on-scroll');
-      fadeElements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const isVisible = elementTop < window.innerHeight - 100;
-        if (isVisible) {
-          element.classList.add('visible');
+  useEffect(() => {
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
       });
-    };
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
+    
+    // Cleanup
+    return () => observer.disconnect();
+  }, []);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  // Testimonial auto-rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial(prev => (prev + 1) % testimonials.length);
+    }, 8000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="home">
-      {/* New elegant intro section */}
-      <section className="intro-section">
-        <div className="intro-background parallax" data-speed="0.3">
-          <ImageLoader src="/images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Farm" />
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-background">
+          <ImageLoader src="images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
         </div>
-        <div className="intro-content">
-          <div className="intro-text-container">
-            <h1 className="intro-title">Elevating Ethiopian Coffee</h1>
-            <p className="intro-subtitle">Direct trade with reliable supply chain</p>
+        <div className="hero-content">
+          <h1>Ethiopian Coffee<br />Excellence</h1>
+          <p>Premium specialty coffee from the birthplace of Arabica</p>
+          <div className="hero-buttons">
+            <Link to="/wholesale" className="btn btn-primary">Export Inquiry</Link>
+            <Link to="/regions" className="btn btn-outline">Explore Origins</Link>
           </div>
         </div>
       </section>
       
-      {/* Minimal About Intro Section */}
-      <section className="about-intro-section section">
+      {/* Our Story Section */}
+      <section className="story-section">
         <div className="container">
-          <div className="about-intro-content">
-            <p className="intro-paragraph">
-              It all started with a passion for Ethiopian coffee and sustainable farming. Now Ethio Coffee Import and Export is a major coffee exporting company in Ethiopia, exporting premium green coffee directly from our partner farms and affiliated farmers. We export various coffee from all major growing regions, from conventional to specialty with years of experience in the coffee business.
-            </p>
-            <Link to="/about" className="btn-text-link">Get To Know Us More <span className="arrow">→</span></Link>
+          <div className="story-grid">
+            <div className="story-content fade-on-scroll">
+              <h2 className="line-after">Direct Trade with Reliable Supply Chain</h2>
+              <p className="lead-text">
+                We connect international buyers with Ethiopia's finest coffees, while supporting the communities that grow them.
+              </p>
+              <p>
+                From our beginnings in the fertile highlands of Ethiopia – the very birthplace of coffee – we've grown into a trusted exporter providing premium Ethiopian coffee to specialty roasters worldwide. Our coffees are carefully selected from Ethiopia's diverse growing regions, processed with precision, and exported with complete traceability.
+              </p>
+              <Link to="/about" className="text-link">Learn our story <i className="fas fa-long-arrow-alt-right"></i></Link>
+            </div>
+            <div className="story-image fade-on-scroll">
+              <div className="image-frame">
+                <ImageLoader src="images/products/coffee-plantation.jpg" alt="Coffee Farm" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="export-grades section">
+      {/* Stats Section */}
+      <section className="stats-section">
         <div className="container">
-          <h2 className="section-title">Available For Export</h2>
-          <p className="section-subtitle">Premium Ethiopian Coffee</p>
-          <div className="grades-grid">
-            {exportGrades.map((grade) => (
-              <div key={grade.name} className="grade-card fade-on-scroll">
-                <div className="grade-image">
-                  <ImageLoader src={grade.image} alt={grade.name} />
-                  <div className="grade-overlay">
-                    <Link to="/wholesale" className="btn btn-primary">Request Quote</Link>
-                  </div>
-                </div>
-                <div className="grade-info">
-                  <span className="grade-specs">{grade.specs}</span>
-                  <h3>{grade.name}</h3>
-                  <p>{grade.description}</p>
-                  <div className="grade-hover">
-                    <Link to="/wholesale" className="view-details">
-                      View Export Details
-                      <span className="arrow">→</span>
-                    </Link>
-                  </div>
-                </div>
+          <div className="stats-grid">
+            {stats.map((stat, index) => (
+              <div className="stat-item fade-on-scroll" key={index}>
+                <div className="stat-number">{stat.number}</div>
+                <div className="stat-label">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      <section className="features-grid section">
+      
+      {/* Coffee Offerings Section */}
+      <section className="offerings-section">
         <div className="container">
-          <div className="features">
-            <div className="feature fade-on-scroll">
-              <h3>Quality Assurance</h3>
-              <p>Rigorous quality control at every stage, from cherry selection to export</p>
-            </div>
-            <div className="feature fade-on-scroll">
-              <h3>Transparency</h3>
-              <p>Full traceability from farm to cup with detailed documentation</p>
-            </div>
-            <div className="feature fade-on-scroll">
-              <h3>Sustainability</h3>
-              <p>Supporting sustainable farming practices and farmer communities</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="feature-section">
-        <div className="container">
-          <h2 className="section-title">Why Choose Us</h2>
-          <div className="feature-grid">
-            <div className="feature fade-on-scroll">
-              <h3>Quality</h3>
-              <p>Specialty grade coffee with cupping scores of 85+ points</p>
-            </div>
-            <div className="feature fade-on-scroll">
-              <h3>Traceability</h3>
-              <p>Full traceability from farm to cup with detailed documentation</p>
-            </div>
-            <div className="feature fade-on-scroll">
-              <h3>Sustainability</h3>
-              <p>Supporting sustainable farming practices and farmer communities</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="stats-section section">
-        <div className="container">
-          <h2 className="section-title">Our Impact by Numbers</h2>
-          <div className="stats-grid">
-            <div className="stat-item fade-on-scroll">
-              <div className="stat-number">35+</div>
-              <div className="stat-label">Washing Stations</div>
-            </div>
-            <div className="stat-item fade-on-scroll">
-              <div className="stat-number">1,500+</div>
-              <div className="stat-label">Partner Farmers</div>
-            </div>
-            <div className="stat-item fade-on-scroll">
-              <div className="stat-number">8</div>
-              <div className="stat-label">Coffee Regions</div>
-            </div>
-            <div className="stat-item fade-on-scroll">
-              <div className="stat-number">6</div>
-              <div className="stat-label">Processing Mills</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* New Video Section */}
-      <section className="video-section section light-section">
-        <div className="container">
-          <h2 className="section-title">Experience Our Coffee Journey</h2>
-          <p className="section-subtitle">From Ethiopia's highlands to your roastery</p>
+          <h2 className="section-title line-after text-center">Premium Coffee Selections</h2>
+          <p className="section-subtitle">Carefully curated coffees from Ethiopia's finest producing regions</p>
           
-          <div className="video-container fade-on-scroll">
-            {/* Replace with your actual video embed code or use a video player component */}
-            <div className="video-placeholder">
-              <div className="placeholder-overlay">
-                <button className="play-button">
-                  <i className="fas fa-play"></i>
-                </button>
-                <p>Our Coffee Story</p>
+          <div className="offerings-grid">
+            {coffeeOfferings.map((offering) => (
+              <div key={offering.id} className="offering-card fade-on-scroll">
+                <div className="offering-image image-zoom">
+                  <ImageLoader src={offering.image} alt={offering.name} />
+                </div>
+                <div className="offering-content">
+                  <div className="offering-tag">{offering.specs}</div>
+                  <h3>{offering.name}</h3>
+                  <p>{offering.description}</p>
+                  <Link to="/offerings" className="text-link">Explore <i className="fas fa-arrow-right"></i></Link>
+                </div>
               </div>
-              <ImageLoader src="/images/products/coffee-plantation.jpg" alt="Coffee Plantation Video Thumbnail" />
-            </div>
-            {/* When implementing the actual video, you can use:
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
-              title="Ethiopian Coffee Journey" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen>
-            </iframe> */}
+            ))}
+          </div>
+          
+          <div className="text-center mt-large">
+            <Link to="/wholesale" className="btn btn-primary">Request Export Pricing</Link>
           </div>
         </div>
       </section>
 
-      <section className="cta-section full-width-section">
-        <ImageLoader src="/images/products/coffee-beans-roasted.jpg" alt="Export Quality Coffee" />
-        <div className="content">
-          <h2>Ready to Import Ethiopian Coffee?</h2>
-          <p>Connect with our export team to discuss your requirements</p>
-          <Link to="/wholesale" className="btn btn-primary">Get Export Quote</Link>
+      {/* Values Section */}
+      <section className="values-section">
+        <div className="container">
+          <div className="values-grid">
+            <div className="value-item fade-on-scroll">
+              <div className="value-icon">
+                <i className="fas fa-award"></i>
+              </div>
+              <h3>Quality Excellence</h3>
+              <p>Rigorous quality control at every step, with SCA-certified grading and meticulous selection</p>
+            </div>
+            
+            <div className="value-item fade-on-scroll">
+              <div className="value-icon">
+                <i className="fas fa-map-marked-alt"></i>
+              </div>
+              <h3>Full Traceability</h3>
+              <p>Complete documentation from farm to export, honoring the regions and farmers behind each coffee</p>
+            </div>
+            
+            <div className="value-item fade-on-scroll">
+              <div className="value-icon">
+                <i className="fas fa-leaf"></i>
+              </div>
+              <h3>Sustainability</h3>
+              <p>Supporting environmental stewardship and community development across Ethiopian coffee regions</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Testimonials Section */}
+      <section className="testimonials-section">
+        <div className="container">
+          <h2 className="section-title text-light">Trusted by Specialty Roasters</h2>
+          
+          <div className="testimonials-slider">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className={`testimonial-slide ${index === activeTestimonial ? 'active' : ''}`}>
+                <div className="testimonial-quote">
+                  <i className="fas fa-quote-left"></i>
+                  <p>{testimonial.quote}</p>
+                </div>
+                <div className="testimonial-author">
+                  <p className="author-name">{testimonial.author}</p>
+                  <p className="author-company">{testimonial.company}, {testimonial.location}</p>
+                </div>
+              </div>
+            ))}
+            <div className="testimonial-dots">
+              {testimonials.map((_, index) => (
+                <button 
+                  key={index} 
+                  className={`dot ${index === activeTestimonial ? 'active' : ''}`}
+                  onClick={() => setActiveTestimonial(index)}
+                  aria-label={`Testimonial ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Export Process Section */}
+      <section className="process-section">
+        <div className="container">
+          <div className="process-header">
+            <h2 className="section-title line-after">Our Export Process</h2>
+            <p className="section-subtitle">A transparent journey from farm to your roastery</p>
+          </div>
+          
+          <div className="process-steps">
+            <div className="process-step fade-on-scroll">
+              <div className="step-number">01</div>
+              <div className="step-content">
+                <h3>Sourcing</h3>
+                <p>We select only the finest coffees from our partner farms and cooperatives in Ethiopia's premier growing regions.</p>
+              </div>
+            </div>
+            
+            <div className="process-step fade-on-scroll">
+              <div className="step-number">02</div>
+              <div className="step-content">
+                <h3>Processing</h3>
+                <p>Each coffee is processed using methods that best highlight its inherent qualities, whether natural, washed, or honey.</p>
+              </div>
+            </div>
+            
+            <div className="process-step fade-on-scroll">
+              <div className="step-number">03</div>
+              <div className="step-content">
+                <h3>Quality Control</h3>
+                <p>Our team of Q-graders evaluates each lot for quality, with multiple cupping sessions to ensure consistency.</p>
+              </div>
+            </div>
+            
+            <div className="process-step fade-on-scroll">
+              <div className="step-number">04</div>
+              <div className="step-content">
+                <h3>Export</h3>
+                <p>We handle all export logistics, including documentation, certification, and reliable shipping arrangements.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="cta-section">
+        <div className="cta-background">
+          <ImageLoader src="images/products/coffee-beans-roasted.jpg" alt="Coffee Beans" />
+        </div>
+        <div className="cta-overlay"></div>
+        <div className="container">
+          <div className="cta-content">
+            <h2>Ready to Source Ethiopian Coffee?</h2>
+            <p>Connect with our export specialists to discuss your specific requirements</p>
+            <div className="cta-buttons">
+              <Link to="/wholesale" className="btn btn-primary">Get Export Quote</Link>
+              <Link to="/contact" className="btn btn-secondary">Contact Us</Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

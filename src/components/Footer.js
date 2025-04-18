@@ -5,11 +5,11 @@ import './Footer.css';
 function Footer() {
   const [email, setEmail] = useState('');
   const [subscribeStatus, setSubscribeStatus] = useState('');
+  const currentYear = new Date().getFullYear();
 
   const handleSubscribe = (e) => {
     e.preventDefault();
     // In a real implementation, this would connect to your newsletter service
-    // For now, we'll just simulate a successful subscription
     if (email.includes('@') && email.includes('.')) {
       setSubscribeStatus('success');
       setEmail('');
@@ -22,78 +22,112 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3>Ethio Coffee Import and Export PLC</h3>
-            <p>Licensed Coffee Exporter (ECX Member)</p>
-            <p>International Trade Registration: ET-2025-LCE</p>
-            <div className="social-links">
-              <a href="https://www.linkedin.com/company/ethiocoffeeexport" target="_blank" rel="noopener noreferrer" className="social-link">
-                <i className="fab fa-linkedin"></i> LinkedIn
-              </a>
-              <a href="https://www.instagram.com/ethiocoffee" target="_blank" rel="noopener noreferrer" className="social-link">
-                <i className="fab fa-instagram"></i> Instagram
-              </a>
+      <div className="footer-main">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-company">
+              <h3>ETHIO COFFEE</h3>
+              <p className="company-tagline">Premium Ethiopian Coffee Exporter</p>
+              <div className="credentials">
+                <p>ECX Licensed Exporter | Fair Trade Certified</p>
+                <p>International Trade ID: ET-2025-LCE</p>
+              </div>
+              <div className="social-icons">
+                <a href="https://www.linkedin.com/company/ethiocoffeeexport" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.instagram.com/ethiocoffee" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com/ethiocoffee" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                  <i className="fab fa-twitter"></i>
+                </a>
+              </div>
+            </div>
+            
+            <div className="footer-nav">
+              <div className="footer-nav-group">
+                <h4>Offerings</h4>
+                <nav>
+                  <Link to="/regions">Coffee Origins</Link>
+                  <Link to="/offerings">Our Coffees</Link>
+                  <Link to="/wholesale">Export Services</Link>
+                  <Link to="/education">Coffee Education</Link>
+                </nav>
+              </div>
+              
+              <div className="footer-nav-group">
+                <h4>Company</h4>
+                <nav>
+                  <Link to="/about">About Us</Link>
+                  <Link to="/contact">Contact</Link>
+                  <a href="/sustainability">Sustainability</a>
+                  <a href="/careers">Careers</a>
+                </nav>
+              </div>
+            </div>
+            
+            <div className="footer-contact">
+              <h4>Export Office</h4>
+              <address>
+                <p>
+                  <i className="fas fa-map-marker-alt"></i>
+                  Gudumale Building, Bole Road<br />
+                  Jakros Area, Addis Ababa, Ethiopia
+                </p>
+                <p>
+                  <i className="fas fa-phone"></i>
+                  <a href="tel:+251911234567">+251 911 234 567</a>
+                </p>
+                <p>
+                  <i className="fas fa-envelope"></i>
+                  <a href="mailto:exports@ethiocoffee.com">exports@ethiocoffee.com</a>
+                </p>
+              </address>
+            </div>
+            
+            <div className="footer-newsletter">
+              <h4>Stay Updated</h4>
+              <p>Subscribe to receive market updates and special offerings</p>
+              <form className="newsletter-form" onSubmit={handleSubscribe}>
+                <div className="newsletter-input-group">
+                  <input 
+                    type="email" 
+                    placeholder="Your Email Address" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <button type="submit">
+                    <i className="fas fa-arrow-right"></i>
+                  </button>
+                </div>
+                {subscribeStatus === 'success' && (
+                  <p className="subscribe-message success">Thank you for subscribing!</p>
+                )}
+                {subscribeStatus === 'error' && (
+                  <p className="subscribe-message error">Please enter a valid email.</p>
+                )}
+              </form>
+              <div className="certifications">
+                <span>USDA Organic</span>
+                <span>Fair Trade</span>
+                <span>Rainforest Alliance</span>
+              </div>
             </div>
           </div>
-          
-          <div className="footer-section">
-            <h4>Export Services</h4>
-            <nav>
-              <Link to="/wholesale">Export Inquiry</Link>
-              <Link to="/regions">Coffee Origins</Link>
-              <Link to="/about">Company Profile</Link>
-              <Link to="/contact">Contact Export Team</Link>
-            </nav>
-          </div>
-
-          <div className="footer-section">
-            <h4>International Contact</h4>
-            <p>Export Office:</p>
-            <p>Bole Road, Addis Ababa</p>
-            <p>Ethiopia</p>
-            <p>Tel: +251 911 234 567</p>
-            <p>WhatsApp: +251 911 234 567</p>
-            <p>exports@ethiocoffeeimportexport.com</p>
-          </div>
-
-          <div className="footer-section">
-            <h4>Export Credentials</h4>
-            <p>ECX Member ID: ETH-2025</p>
-            <p>Fair Trade Certified</p>
-            <p>Rainforest Alliance</p>
-            <p>USDA & EU Organic</p>
-            <p>ISO 22000:2018</p>
-          </div>
-          
-          {/* New Newsletter Subscription Section */}
-          <div className="footer-section newsletter-section">
-            <h4>Stay Updated</h4>
-            <p>Subscribe to our monthly newsletter for market updates and special offerings</p>
-            <form className="newsletter-form" onSubmit={handleSubscribe}>
-              <div className="form-group">
-                <input 
-                  type="email" 
-                  placeholder="Your Email Address" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <button type="submit" className="btn-subscribe">Subscribe</button>
-              </div>
-              {subscribeStatus === 'success' && (
-                <p className="subscribe-message success">Thank you for subscribing!</p>
-              )}
-              {subscribeStatus === 'error' && (
-                <p className="subscribe-message error">Please enter a valid email.</p>
-              )}
-            </form>
-          </div>
         </div>
-        
-        <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Ethio Coffee Import and Export PLC. All rights reserved.</p>
+      </div>
+      
+      <div className="footer-bottom">
+        <div className="container">
+          <div className="footer-bottom-inner">
+            <p>&copy; {currentYear} Ethio Coffee Import and Export PLC. All Rights Reserved.</p>
+            <div className="footer-legal">
+              <a href="/terms">Terms</a>
+              <a href="/privacy">Privacy</a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
