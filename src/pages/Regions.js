@@ -105,11 +105,13 @@ function Regions() {
   const handleRegionClick = (regionId) => {
     setActiveRegion(regionId);
     
-    // Scroll to details section smoothly
-    const detailsElement = document.getElementById('region-details');
-    if (detailsElement) {
-      detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Use setTimeout to ensure state update completes before scrolling
+    setTimeout(() => {
+      const detailsElement = document.getElementById('region-details');
+      if (detailsElement) {
+        detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0); // Delay of 0ms pushes execution to the next tick
   };
 
   const selectedRegion = regionData.find(region => region.id === activeRegion);
