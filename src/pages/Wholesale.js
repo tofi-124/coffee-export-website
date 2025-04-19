@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Added useEffect
+import React, { useState, useEffect, useRef } from 'react'; // Added useRef
 import ImageLoader from '../components/ImageLoader';
 import FormFeedback from '../components/FormFeedback';
 import './Wholesale.css';
@@ -22,6 +22,9 @@ function Wholesale() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Add refs for animation targets
+  const infoCardsRef = useRef(null);
 
   // Add useEffect for animations like in Home.js
   useEffect(() => {
@@ -35,7 +38,63 @@ function Wholesale() {
     
     document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
     
+    // Fix for info cards not appearing when navigating
+    // Apply CSS immediately to ensure proper styling
+    const infoCards = document.querySelectorAll('.info-card');
+    infoCards.forEach((card, index) => {
+      card.dataset.index = index;
+      
+      // Force visibility and styling application immediately
+      setTimeout(() => {
+        card.classList.add('visible');
+        card.classList.add('fade-on-scroll');
+        
+        // Ensure proper styling of header (fix for navigation issue)
+        const header = card.querySelector('.info-header');
+        if (header) {
+          header.style.backgroundColor = 'var(--dark-brown)';
+          header.style.color = 'var(--light-text)';
+        }
+        
+        // Ensure proper styling of header h3 (fix for navigation issue)
+        const h3 = card.querySelector('.info-header h3');
+        if (h3) {
+          h3.style.color = 'var(--light-text)';
+        }
+      }, 50);
+    });
+    
     return () => observer.disconnect();
+  }, []);
+  
+  // Additional effect specifically for info cards to ensure they're visible on direct navigation
+  useEffect(() => {
+    // Force the info cards to be visible with proper styling when the component is mounted
+    const forceVisibility = () => {
+      const infoCards = document.querySelectorAll('.info-card');
+      infoCards.forEach(card => {
+        card.classList.add('visible');
+        card.classList.add('fade-on-scroll');
+        
+        // Ensure proper styling of header (fix for navigation issue)
+        const header = card.querySelector('.info-header');
+        if (header) {
+          header.style.backgroundColor = 'var(--dark-brown)';
+          header.style.color = 'var(--light-text)';
+        }
+        
+        // Ensure proper styling of header h3 (fix for navigation issue)
+        const h3 = card.querySelector('.info-header h3');
+        if (h3) {
+          h3.style.color = 'var(--light-text)';
+        }
+      });
+    };
+    
+    // Small delay to ensure DOM is fully rendered but fast enough for smooth UX
+    const timeoutId = setTimeout(forceVisibility, 50);
+    
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const validateForm = () => {
@@ -313,8 +372,8 @@ function Wholesale() {
             </div>
 
             {/* Contact Info using info-card structure */}
-            <div className="contact-info">
-              <div className="info-card">
+            <div className="contact-info" ref={infoCardsRef}>
+              <div className="info-card" data-index="0">
                 <div className="info-header">
                   <h3>Export Office</h3>
                 </div>
@@ -326,7 +385,7 @@ function Wholesale() {
                 </div>
               </div>
 
-              <div className="info-card">
+              <div className="info-card" data-index="1">
                 <div className="info-header">
                   <h3>North American Office</h3>
                 </div>

@@ -171,17 +171,34 @@
 /* Info Card (Used for office details) */
 .info-card {
   background: var(--light-text);
-  padding: var(--card-padding-desktop);
   border-radius: var(--border-radius-medium);
   box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Match the Contact.css styling for consistency */
+.info-header {
+  background-color: var(--dark-brown);
+  color: var(--light-text);
+  padding: 1.2rem 1.5rem;
 }
 
 .info-header h3 {
-  color: var(--dark-brown);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.8rem;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: 'Fraunces', serif;
+  color: var(--light-text); /* Ensure text is light on dark background */
+}
+
+.info-body {
+  padding: 1.5rem;
 }
 
 .info-body p {

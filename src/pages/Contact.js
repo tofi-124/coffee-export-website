@@ -20,6 +20,7 @@ function Contact() {
   
   // References for scroll animations
   const formRef = useRef(null);
+  const infoCardsRef = useRef(null);
   
   // Setup intersection observer for scroll animations
   useEffect(() => {
@@ -43,7 +44,63 @@ function Contact() {
       observer.observe(formRef.current);
     }
     
+    // Improved fix for info cards not appearing when navigating
+    // Apply CSS immediately to ensure proper styling
+    const infoCards = document.querySelectorAll('.info-card');
+    infoCards.forEach((card, index) => {
+      card.dataset.index = index;
+      observer.observe(card);
+      
+      // Force visibility and styling application immediately
+      setTimeout(() => {
+        card.classList.add('fade-on-scroll');
+        
+        // Ensure proper styling of header (fix for navigation issue)
+        const header = card.querySelector('.info-header');
+        if (header) {
+          header.style.backgroundColor = 'var(--dark-brown)';
+          header.style.color = 'var(--light-text)';
+        }
+        
+        // Ensure proper styling of header h3 (fix for navigation issue)
+        const h3 = card.querySelector('.info-header h3');
+        if (h3) {
+          h3.style.color = 'var(--light-text)';
+        }
+      }, 50);
+    });
+    
     return () => observer.disconnect();
+  }, []);
+
+  // Additional effect to handle direct navigation to the page
+  useEffect(() => {
+    // Force the info cards to be visible with proper styling when the component is mounted
+    const forceVisibility = () => {
+      const infoCards = document.querySelectorAll('.info-card');
+      infoCards.forEach((card, index) => {
+        card.classList.add('fade-on-scroll');
+        card.style.setProperty('--scroll-index', index);
+        
+        // Ensure proper styling of header (fix for navigation issue)
+        const header = card.querySelector('.info-header');
+        if (header) {
+          header.style.backgroundColor = 'var(--dark-brown)';
+          header.style.color = 'var(--light-text)';
+        }
+        
+        // Ensure proper styling of header h3 (fix for navigation issue)
+        const h3 = card.querySelector('.info-header h3');
+        if (h3) {
+          h3.style.color = 'var(--light-text)';
+        }
+      });
+    };
+    
+    // Even smaller delay to ensure DOM is fully rendered but fast enough for smooth UX
+    const timeoutId = setTimeout(forceVisibility, 50);
+    
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const handleInputChange = (e) => {
@@ -200,8 +257,8 @@ function Contact() {
               )}
             </div>
 
-            <div className="contact-info">
-              <div className="info-card">
+            <div className="contact-info" ref={infoCardsRef}>
+              <div className="info-card" data-index="0">
                 <div className="info-header">
                   <h3>Head Office</h3>
                 </div>
@@ -221,7 +278,7 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="info-card">
+              <div className="info-card" data-index="1">
                 <div className="info-header">
                   <h3>Export Inquiries</h3>
                 </div>
@@ -235,7 +292,7 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="info-card">
+              <div className="info-card" data-index="2">
                 <div className="info-header">
                   <h3>Sample Requests</h3>
                 </div>
