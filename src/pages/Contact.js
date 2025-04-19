@@ -8,8 +8,7 @@ function Contact() {
     company: '',
     role: '',
     country: '',
-    message: '',
-    coffeeType: []
+    message: ''
   });
 
   const [formStatus, setFormStatus] = useState({
@@ -20,7 +19,6 @@ function Contact() {
   
   // References for scroll animations
   const formRef = useRef(null);
-  const infoCardsRef = useRef([]);
   
   // Setup intersection observer for scroll animations
   useEffect(() => {
@@ -44,30 +42,12 @@ function Contact() {
       observer.observe(formRef.current);
     }
     
-    // Observe info cards
-    document.querySelectorAll('.info-card').forEach((card, index) => {
-      card.dataset.index = index;
-      observer.observe(card);
-    });
-    
     return () => observer.disconnect();
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setFormData({ ...formData, coffeeType: [...formData.coffeeType, value] });
-    } else {
-      setFormData({
-        ...formData,
-        coffeeType: formData.coffeeType.filter((type) => type !== value)
-      });
-    }
   };
 
   const handleSubmit = (e) => {
@@ -87,8 +67,7 @@ function Contact() {
       company: '',
       role: '',
       country: '',
-      message: '',
-      coffeeType: []
+      message: ''
     });
   };
 
@@ -187,68 +166,17 @@ function Contact() {
                     </div>
                   </div>
 
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="country">Country *</label>
-                      <input
-                        type="text"
-                        id="country"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="Your country"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Interested In</label>
-                      <div className="checkbox-group">
-                        <div className="checkbox-item">
-                          <input
-                            type="checkbox"
-                            id="washed"
-                            name="coffeeType"
-                            value="Washed"
-                            onChange={handleCheckboxChange}
-                            checked={formData.coffeeType.includes('Washed')}
-                          />
-                          <label htmlFor="washed">Washed</label>
-                        </div>
-                        <div className="checkbox-item">
-                          <input
-                            type="checkbox"
-                            id="natural"
-                            name="coffeeType"
-                            value="Natural"
-                            onChange={handleCheckboxChange}
-                            checked={formData.coffeeType.includes('Natural')}
-                          />
-                          <label htmlFor="natural">Natural</label>
-                        </div>
-                        <div className="checkbox-item">
-                          <input
-                            type="checkbox"
-                            id="honey"
-                            name="coffeeType"
-                            value="Honey"
-                            onChange={handleCheckboxChange}
-                            checked={formData.coffeeType.includes('Honey')}
-                          />
-                          <label htmlFor="honey">Honey</label>
-                        </div>
-                        <div className="checkbox-item">
-                          <input
-                            type="checkbox"
-                            id="experimental"
-                            name="coffeeType"
-                            value="Experimental"
-                            onChange={handleCheckboxChange}
-                            checked={formData.coffeeType.includes('Experimental')}
-                          />
-                          <label htmlFor="experimental">Experimental</label>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="form-group">
+                    <label htmlFor="country">Country *</label>
+                    <input
+                      type="text"
+                      id="country"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Your country"
+                    />
                   </div>
 
                   <div className="form-group">

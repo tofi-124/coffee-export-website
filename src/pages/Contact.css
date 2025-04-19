@@ -206,6 +206,55 @@
   align-items: center;
 }
 
+/* Custom checkbox styling */
+.checkbox-item {
+  position: relative;
+  padding-left: 2rem;
+}
+.checkbox-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+.checkbox-item label {
+  position: relative;
+  cursor: pointer;
+}
+.checkbox-item label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid var(--dark-brown);
+  border-radius: var(--button-border-radius);
+  background: transparent;
+  box-sizing: border-box;
+}
+.checkbox-item input[type="checkbox"]:checked + label::before {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.checkbox-item label::after {
+  content: '';
+  position: absolute;
+  left: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 0.5rem;
+  height: 0.8rem;
+  border: solid var(--light-text);
+  border-width: 0 2px 2px 0;
+  opacity: 0;
+}
+.checkbox-item input[type="checkbox"]:checked + label::after {
+  opacity: 1;
+}
+
 .checkbox-item input[type="checkbox"] {
   width: auto;
   margin-right: 0.75rem;
@@ -264,15 +313,16 @@
 
 /* Contact Info Cards */
 .contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--grid-gap-large);
+  margin-top: var(--grid-gap-large);
 }
 
 .info-card {
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--light-text);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -307,13 +357,17 @@
 
 /* Map Section */
 .map-section {
-  height: 500px;
-  margin-top: 0;
+  padding: var(--section-padding-desktop);
+  background-color: var(--background-light);
 }
 
 .map-container {
-  height: 100%;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 500px;
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Animation */
