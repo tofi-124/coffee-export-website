@@ -44,10 +44,6 @@ function Header() {
 
   return (
     <>
-      <div className="announcement-bar">
-        <div className="container">
-        </div>
-      </div>
       <header className={`header ${scrolled || alwaysScrolled ? 'header-scrolled' : ''}`}>
         <div className="container">
           <div className="header-inner">
