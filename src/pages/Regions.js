@@ -237,7 +237,7 @@ function Regions() {
           </div>
           
           <div className="map-container fade-on-scroll">
-            <img 
+            <ImageLoader 
               src="/images/products/coffee-plantation.jpg" 
               alt="Ethiopian Coffee Regions Map" 
             />

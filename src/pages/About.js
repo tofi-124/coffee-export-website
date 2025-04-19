@@ -131,10 +131,10 @@ function About() {
 
             <div className="value-card fade-on-scroll">
               <div className="value-icon">
-                <i className="fas fa-handshake"></i>
+                <i className="fas fa-leaf"></i>
               </div>
-              <h3>Transparent Relationships</h3>
-              <p>We believe in building trust through transparency in every transaction. For us, this means full traceability to origin, honest pricing, and open communication with both producers and buyers to create sustainable, long-term partnerships.</p>
+              <h3>Environmental Stewardship</h3>
+              <p>We promote sustainable farming practices that protect Ethiopia's unique coffee forest ecosystems while supporting biodiversity and ensuring the long-term health of coffee-producing regions for future generations.</p>
             </div>
             
           </div>

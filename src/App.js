@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,8 +9,8 @@ import './styles/global.css';
 // Scroll to top component
 function ScrollToTop() {
   const { pathname } = useLocation();
-
-  useEffect(() => {
+  
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -30,7 +30,7 @@ function App() {
       <ScrollToTop />
       <div className="app">
         <Header />
-        <main className="main-content page"> {/* Added page class */}
+        <main className="main-content page">
           <Suspense fallback={<LoadingSpinner />}>
             <PageTransition />
             <Routes>

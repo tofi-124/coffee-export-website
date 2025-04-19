@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ImageLoader from '../components/ImageLoader';
 import './Contact.css';
 
 function Contact() {
@@ -75,7 +76,7 @@ function Contact() {
     <div className="contact-page">
       <section className="contact-hero">
         <div className="hero-background">
-          <img src="/images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
+          <ImageLoader src="/images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
         </div>
         <div className="container">
           <div className="hero-content">
