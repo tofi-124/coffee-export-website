@@ -84,6 +84,46 @@ const offerings = [
     },
     image: 'images/products/coffee-beans-roasted.jpg',
     flavorProfile: ['Berry', 'Mocha', 'Spice', 'Exotic']
+  },
+  {
+    id: 5,
+    name: 'Limu Classic',
+    category: 'Specialty Grade',
+    type: 'Washed',
+    region: 'Limu',
+    cupping: '84-86',
+    altitude: '1,400-2,000m',
+    certification: ['Fair Trade'],
+    cropYear: '2024/25',
+    description: 'Balanced profile with subtle wine and spice notes complemented by smooth body and sweet finish.',
+    specs: {
+      moisture: '10-12%',
+      defects: '0-4 full defects/300g',
+      screen: '13+',
+      processing: 'Eco-washed'
+    },
+    image: 'images/products/coffee-pouring.jpg',
+    flavorProfile: ['Red Wine', 'Spice', 'Chocolate', 'Sweet']
+  },
+  {
+    id: 6,
+    name: 'Kaffa Heritage',
+    category: 'Specialty Grade',
+    type: 'Natural',
+    region: 'Kaffa',
+    cupping: '85-88',
+    altitude: '1,500-2,100m',
+    certification: ['Organic'],
+    cropYear: '2024/25',
+    description: 'Complex herbal and berry character with medium body and bright acidity, highlighting Kaffa’s wild origins.',
+    specs: {
+      moisture: '10-12%',
+      defects: '0-3 full defects/300g',
+      screen: '15+',
+      processing: 'Traditional natural process'
+    },
+    image: 'images/products/cupping-session.jpg',
+    flavorProfile: ['Herbal', 'Berry', 'Chocolate', 'Bright']
   }
 ];
 

@@ -154,6 +154,7 @@ function Regions() {
               >
                 <div className="region-image">
                   <ImageLoader src={region.image} alt={`${region.name} Coffee`} />
+                  <div className="region-image-name">{region.name}</div>
                 </div>
                 <div className="region-overlay">
                   <div className="region-preview-content">
