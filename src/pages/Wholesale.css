@@ -1,10 +1,11 @@
-.wholesale-page {
-  padding-top: 80px;
-  min-height: 100vh;
-}
+/* Wholesale page specific styles - Refactored for consistency */
 
+/* Remove redundant page-level padding/min-height if handled by .page in global.css */
+/* .wholesale-page { ... } */
+
+/* Hero Section - Align with global styles */
 .wholesale-hero {
-  height: 60vh;
+  height: 60vh; /* Keep specific height if needed */
   min-height: 500px;
   position: relative;
   color: var(--light-text);
@@ -12,8 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Ensure background image handling is consistent */
 }
 
+/* ... existing hero img styles ... */
 .wholesale-hero img {
   position: absolute;
   top: 0;
@@ -24,6 +27,8 @@
   z-index: -1;
 }
 
+
+/* Use global overlay variable if applicable, or keep specific */
 .wholesale-hero::after {
   content: '';
   position: absolute;
@@ -31,7 +36,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--overlay-background, rgba(0, 0, 0, 0.6)); /* Use global or fallback */
   z-index: 0;
 }
 
@@ -39,42 +44,67 @@
   position: relative;
   z-index: 2;
   max-width: 800px;
-  padding: 0 2rem;
+  padding: 0 var(--container-padding-mobile); /* Use variable */
 }
 
 .wholesale-hero h1 {
+  /* Use global heading styles or keep specific if needed */
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  color: var(--light-text);
+  font-weight: 700; /* Or inherit from global h1 */
+  color: var(--light-text); /* Ensure color consistency */
 }
 
 .wholesale-hero p {
+  /* Use global paragraph styles or keep specific */
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto;
 }
 
+/* Section Styling - Use global variables */
+.wholesale-intro,
+.quality-standards,
+.wholesale-form, /* Renamed from .wholesale-form-section for consistency */
+.contact-offices {
+  padding: var(--section-padding-desktop); /* Use global variable */
+}
+
 .wholesale-intro {
-  padding: 6rem 0;
   background-color: var(--background-light);
 }
 
+.quality-standards {
+  background-color: var(--light-text);
+}
+
+.wholesale-form {
+  background-color: var(--background-light);
+}
+
+.contact-offices {
+   background-color: var(--background-light);
+}
+
+
+/* Intro Grid */
 .intro-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: var(--grid-gap-large); /* Use global variable */
   align-items: center;
 }
 
 .intro-content h2 {
+  /* Use global h2 styles or keep specific */
   font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: 1.5rem;
   color: var(--dark-brown);
 }
 
 .intro-content p {
+  /* Use global p styles or keep specific */
   font-size: 1.1rem;
   line-height: 1.7;
   color: var(--text-color);
@@ -86,13 +116,13 @@
   padding: 0;
   margin: 2rem 0;
   display: grid;
-  gap: 1rem;
+  gap: var(--grid-gap-xs); /* Use global variable */
 }
 
 .benefits-list li {
   padding-left: 2rem;
   position: relative;
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* Consistent font size */
   color: var(--text-color);
 }
 
@@ -100,215 +130,91 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--accent-color);
+  color: var(--accent-color); /* Use global variable */
   font-weight: bold;
 }
 
 .intro-image {
-  height: 500px;
-  border-radius: var(--border-radius-medium);
+  height: 500px; /* Keep specific height if needed */
+  border-radius: var(--border-radius-medium); /* Use global variable */
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Consistent shadow */
 }
 
+/* ... existing intro-image img styles ... */
 .intro-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.quality-standards {
-  padding: 6rem 0;
-  background-color: var(--light-text);
-}
 
+/* Quality Standards - Use global card styles if possible */
 .standards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: var(--grid-gap-medium); /* Use global variable */
   margin-top: 3rem;
 }
 
+/* Apply global card and hover styles */
 .standard-card {
   background: var(--light-text);
-  padding: 2rem;
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  padding: var(--card-padding-desktop); /* Use global variable */
+  border-radius: var(--border-radius-medium); /* Use global variable */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Consistent shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Use global transition */
 }
 
 .standard-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px); /* Consistent hover effect */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Consistent hover shadow */
 }
 
 .standard-card h3 {
+  /* Use global h3 styles or keep specific */
   font-size: 1.3rem;
   margin-bottom: 1rem;
   color: var(--dark-brown);
 }
 
 .standard-card p {
+  /* Use global p styles or keep specific */
   color: var(--text-color);
   line-height: 1.6;
 }
 
-.wholesale-form-section {
-  padding: 6rem 0;
-  background-color: var(--background-light);
-}
-
-.form-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem;
-  background: var(--light-text);
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: var(--dark-brown);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-medium);
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  background-color: var(--background-light);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(196, 155, 102, 0.1);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.checkbox-group {
-  margin: 2rem 0;
-}
-
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.btn-submit {
-  width: 100%;
-  max-width: 300px;
-  margin: 2rem auto 0;
-  display: block;
-  padding: 1rem;
-  font-size: 1.1rem;
-  background-color: var(--accent-color);
-  color: var(--dark-brown);
-  border: none;
-  border-radius: var(--border-radius-medium);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-submit:hover {
-  background-color: var(--dark-brown);
-  color: var(--light-text);
-  transform: translateY(-2px);
-}
-
-.btn-submit.submitting {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.benefits-section {
-  padding: 4rem 0;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  padding: 0 2rem;
-}
-
-.benefits-card {
-  background: var(--light-text);
-  padding: 2rem;
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
-}
-
-.contact-offices {
-  padding: 4rem 0;
-  background-color: var(--background-light);
-}
-
+/* Contact Offices - Use global card styles */
 .offices-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: var(--grid-gap-medium); /* Use global variable */
   margin-top: 2rem;
 }
 
+/* Apply global card and hover styles */
 .office-card {
   background: var(--light-text);
-  padding: 2rem;
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  padding: var(--card-padding-desktop); /* Use global variable */
+  border-radius: var(--border-radius-medium); /* Use global variable */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Consistent shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Use global transition */
 }
 
 .office-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px); /* Consistent hover effect */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Consistent hover shadow */
 }
 
 .office-card h3 {
+  /* Use global h3 styles or keep specific */
   color: var(--dark-brown);
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 .office-card p {
+  /* Use global p styles or keep specific */
   margin-bottom: 1rem;
   line-height: 1.6;
   color: var(--text-color);
@@ -316,22 +222,79 @@
 
 .office-card strong {
   color: var(--dark-brown);
+  font-weight: 500; /* Consistent weight */
 }
 
+
+/* Wholesale Form Section - Use global form styles */
+/* Remove .form-container if structure uses .container directly */
+/* .form-container { ... } */
+
+.contact-form { /* Assuming this class is on the form element */
+   max-width: 900px; /* Or adjust as needed */
+   margin: 3rem auto 0; /* Add top margin */
+   padding: var(--card-padding-desktop); /* Use global variable */
+   background: var(--light-text);
+   border-radius: var(--border-radius-medium); /* Use global variable */
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap-medium); /* Use global variable */
+  margin-bottom: 2rem; /* Add margin below grid */
+}
+
+/* Use global .form-group styles */
+/* .form-group { ... } */
+/* .form-group.full-width { ... } */
+/* .form-group label { ... } */
+/* .form-group input, .form-group select, .form-group textarea { ... } */
+/* .form-group input:focus, .form-group select:focus, .form-group textarea:focus { ... } */
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Remove custom button style, use global .btn and .btn-primary */
+/* .btn-submit { ... } */
+/* Ensure the button in Wholesale.js has className="btn btn-primary" */
+
+
+/* Remove unused styles */
+/* .checkbox-group { ... } */
+/* .checkbox-grid { ... } */
+/* .checkbox-label { ... } */
+/* .benefits-section { ... } */
+/* .benefits-grid { ... } */
+/* .benefits-card { ... } */
+
+
+/* Responsive Styles - Adjust based on global breakpoints and variables */
 @media (max-width: 968px) {
+  .wholesale-intro,
+  .quality-standards,
+  .wholesale-form,
+  .contact-offices {
+    padding: var(--section-padding-tablet); /* Use global variable */
+  }
+
   .intro-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--grid-gap-medium); /* Use global variable */
   }
 
   .intro-image {
     height: 400px;
-    order: -1;
+    order: -1; /* Keep if needed */
   }
 
-  .benefits-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 0 1.5rem;
+  .standard-card,
+  .office-card,
+  .contact-form {
+     padding: var(--card-padding-tablet); /* Use global variable */
   }
 }
 
@@ -341,34 +304,28 @@
   }
 
   .wholesale-hero .content {
-    padding: 0 1.5rem;
+    padding: 0 var(--container-padding-mobile); /* Use global variable */
   }
 
-  .wholesale-intro {
-    padding: 4rem 0;
+  .wholesale-intro,
+  .quality-standards,
+  .wholesale-form,
+  .contact-offices {
+    padding: var(--section-padding-mobile); /* Use global variable */
   }
 
-  .form-container {
-    padding: 2rem;
-    margin: 0 1rem;
-  }
+  /* Remove .form-container adjustments if not used */
+  /* .form-container { ... } */
 
   .form-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: var(--grid-gap-small); /* Use global variable */
   }
 
-  .checkbox-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .benefits-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-  }
-
-  .benefits-card {
-    padding: 1.5rem;
+  .standard-card,
+  .office-card,
+  .contact-form {
+     padding: var(--card-padding-mobile); /* Use global variable */
   }
 
   .offices-grid {
@@ -381,12 +338,23 @@
     min-height: 350px;
   }
 
-  .form-container {
-    padding: 1.5rem;
-    margin: 0 1rem;
-  }
+  /* Remove .form-container adjustments if not used */
+  /* .form-container { ... } */
 
   .intro-image {
     height: 300px;
+  }
+
+   .wholesale-intro,
+  .quality-standards,
+  .wholesale-form,
+  .contact-offices {
+    padding: var(--section-padding-xs); /* Use global variable */
+  }
+
+   .standard-card,
+  .office-card,
+  .contact-form {
+     padding: var(--card-padding-xs); /* Use global variable */
   }
 }

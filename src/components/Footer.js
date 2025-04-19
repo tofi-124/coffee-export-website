@@ -59,7 +59,6 @@ function Footer() {
                 <nav>
                   <Link to="/about">About Us</Link>
                   <Link to="/contact">Contact</Link>
-                  <a href="/careers">Careers</a>
                 </nav>
               </div>
             </div>

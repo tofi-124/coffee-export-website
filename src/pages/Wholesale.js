@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Added useEffect
 import ImageLoader from '../components/ImageLoader';
 import FormFeedback from '../components/FormFeedback';
 import './Wholesale.css';
@@ -22,6 +22,21 @@ function Wholesale() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Add useEffect for animations like in Home.js
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
+    
+    return () => observer.disconnect();
+  }, []);
 
   const validateForm = () => {
     if (!formData.companyName.trim()) {
@@ -121,38 +136,214 @@ function Wholesale() {
   };
 
   return (
-    <div className="wholesale-page">
-      <section className="wholesale-hero full-width-section">
+    // Added 'page' class for consistency with App.js main tag
+    <div className="page wholesale-page">
+      {/* Hero Section Updated */}
+      <section className="wholesale-hero full-width-section fade-on-scroll">
         <ImageLoader src="/images/process/coffee-processing.jpg" alt="Coffee Processing Facility" />
-        <div className="content">
-          <h1>Export & Business Inquiries</h1>
-          <p>Premium Ethiopian coffee beans for international markets</p>
+        <div className="container">
+          <div className="content">
+            <span className="hero-tagline">EXPORT & WHOLESALE</span> {/* Added tagline */}
+            <h1>Business Inquiries</h1> {/* Simplified title */}
+            <p>Premium Ethiopian coffee beans for international markets</p>
+          </div>
         </div>
       </section>
 
-      <section className="contact-offices section">
+      {/* Combined Offices and Form Section */}
+      <section className="wholesale-content section fade-on-scroll">
         <div className="container">
-          <h2 className="section-title">Our Offices</h2>
-          <div className="offices-grid">
-            <div className="office-card">
-              <h3>Export Office</h3>
-              <p><strong>Address:</strong> Bole Road, Airport Area <br />Addis Ababa, Ethiopia</p>
-              <p><strong>Phone:</strong> +251 11 667 8901</p>
-              <p><strong>Email:</strong> exports@ethiocoffee-export.com</p>
-              <p><strong>Hours:</strong> Monday-Friday, 9:00 AM - 5:00 PM (EAT)</p>
+          {/* Section Header like Contact page */}
+          <div className="section-header text-center">
+            <h2 className="section-title line-after">Connect With Us</h2>
+            <p className="section-subtitle">
+              Discuss your requirements for sourcing premium Ethiopian coffee with our export team.
+            </p>
+          </div>
+
+          {/* Grid layout for form and info */}
+          <div className="contact-grid">
+            {/* Form Container */}
+            <div className="contact-form-container">
+              {formStatus.message && (
+                <FormFeedback type={formStatus.type} message={formStatus.message} />
+              )}
+              <form onSubmit={handleSubmit} className="contact-form">
+                {/* Form fields remain inside form-grid */}
+                <div className="form-grid">
+                  {/* ... existing form groups ... */}
+                  <div className="form-group">
+                    <label htmlFor="companyName">Company Name *</label>
+                    <input
+                      type="text"
+                      id="companyName"
+                      name="companyName"
+                      value={formData.companyName}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="contactName">Contact Name *</label>
+                    <input
+                      type="text"
+                      id="contactName"
+                      name="contactName"
+                      value={formData.contactName}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number *</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="inquiryType">Type of Inquiry *</label>
+                    <select
+                      id="inquiryType"
+                      name="inquiryType"
+                      value={formData.inquiryType}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                    >
+                      <option value="">Select an option</option>
+                      <option value="exportQuote">Export Quote Request</option>
+                      <option value="samples">Sample Request</option>
+                      <option value="partnership">Partnership Opportunity</option>
+                      <option value="information">General Information</option>
+                    </select>
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="businessType">Business Type *</label>
+                    <select
+                      id="businessType"
+                      name="businessType"
+                      value={formData.businessType}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                    >
+                      <option value="importer">Coffee Importer</option>
+                      <option value="roaster">Large Scale Roaster</option>
+                      <option value="distributor">Coffee Distributor</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="volume">Required Volume</label>
+                    <select
+                      id="volume"
+                      name="volume"
+                      value={formData.volume}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                    >
+                      <option value="">Select Volume</option>
+                      <option value="small">Small (1-10 tons)</option>
+                      <option value="medium">Medium (10-50 tons)</option>
+                      <option value="large">Large (50+ tons)</option>
+                      <option value="notSure">Not sure yet</option>
+                    </select>
+                  </div>
+    
+                  <div className="form-group">
+                    <label htmlFor="destination">Destination Country</label>
+                    <input
+                      type="text"
+                      id="destination"
+                      name="destination"
+                      value={formData.destination}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+    
+                  <div className="form-group full-width">
+                    <label htmlFor="message">Message *</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="4"
+                      required
+                      placeholder="Please specify your requirements, questions, or details about your business needs"
+                      disabled={isSubmitting}
+                    ></textarea>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className={`btn btn-primary submit-btn ${isSubmitting ? 'submitting' : ''}`} // Use submit-btn class
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
+                </button>
+              </form>
             </div>
-            
-            <div className="office-card">
-              <h3>North American Office</h3>
-              <p><strong>Phone:</strong> +1 (647) 555-1234</p>
-              <p><strong>Email:</strong> northamerica@ethiocoffee-export.com</p>
-              <p>For clients in USA and Canada</p>
+
+            {/* Contact Info using info-card structure */}
+            <div className="contact-info">
+              <div className="info-card">
+                <div className="info-header">
+                  <h3>Export Office</h3>
+                </div>
+                <div className="info-body">
+                  <p><strong>Address:</strong> Bole Road, Airport Area <br />Addis Ababa, Ethiopia</p>
+                  <p><strong>Phone:</strong> +251 11 667 8901</p>
+                  <p><strong>Email:</strong> exports@ethiocoffee-export.com</p>
+                  <p><strong>Hours:</strong> Monday-Friday, 9:00 AM - 5:00 PM (EAT)</p>
+                </div>
+              </div>
+
+              <div className="info-card">
+                <div className="info-header">
+                  <h3>North American Office</h3>
+                </div>
+                <div className="info-body">
+                  <p><strong>Phone:</strong> +1 (647) 555-1234</p>
+                  <p><strong>Email:</strong> northamerica@ethiocoffee-export.com</p>
+                  <p>For clients in USA and Canada</p>
+                </div>
+              </div>
+              {/* Add more info cards if needed */}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="wholesale-intro section">
+      {/* Other sections remain unchanged */}
+      <section className="wholesale-intro section fade-on-scroll">
         <div className="container">
           <div className="intro-grid">
             <div className="intro-content">
@@ -176,7 +367,7 @@ function Wholesale() {
         </div>
       </section>
 
-      <section className="quality-standards section">
+      <section className="quality-standards section fade-on-scroll">
         <div className="container">
           <h2 className="section-title">Export Standards</h2>
           <div className="standards-grid">
@@ -201,158 +392,6 @@ function Wholesale() {
         </div>
       </section>
 
-      <section className="wholesale-form section">
-        <div className="container">
-          <h2 className="section-title">Business Inquiry</h2>
-          <p className="section-subtitle">Complete the form below to discuss your requirements</p>
-          
-          {formStatus.message && (
-            <FormFeedback type={formStatus.type} message={formStatus.message} />
-          )}
-          
-          <form onSubmit={handleSubmit} className="contact-form">
-            <div className="form-grid">
-              <div className="form-group">
-                <label htmlFor="companyName">Company Name *</label>
-                <input
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="contactName">Contact Name *</label>
-                <input
-                  type="text"
-                  id="contactName"
-                  name="contactName"
-                  value={formData.contactName}
-                  onChange={handleChange}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email Address *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number *</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inquiryType">Type of Inquiry *</label>
-                <select
-                  id="inquiryType"
-                  name="inquiryType"
-                  value={formData.inquiryType}
-                  onChange={handleChange}
-                  required
-                  disabled={isSubmitting}
-                >
-                  <option value="">Select an option</option>
-                  <option value="exportQuote">Export Quote Request</option>
-                  <option value="samples">Sample Request</option>
-                  <option value="partnership">Partnership Opportunity</option>
-                  <option value="information">General Information</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="businessType">Business Type *</label>
-                <select
-                  id="businessType"
-                  name="businessType"
-                  value={formData.businessType}
-                  onChange={handleChange}
-                  required
-                  disabled={isSubmitting}
-                >
-                  <option value="importer">Coffee Importer</option>
-                  <option value="roaster">Large Scale Roaster</option>
-                  <option value="distributor">Coffee Distributor</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="volume">Required Volume</label>
-                <select
-                  id="volume"
-                  name="volume"
-                  value={formData.volume}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                >
-                  <option value="">Select Volume</option>
-                  <option value="small">Small (1-10 tons)</option>
-                  <option value="medium">Medium (10-50 tons)</option>
-                  <option value="large">Large (50+ tons)</option>
-                  <option value="notSure">Not sure yet</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="destination">Destination Country</label>
-                <input
-                  type="text"
-                  id="destination"
-                  name="destination"
-                  value={formData.destination}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                />
-              </div>
-
-              <div className="form-group full-width">
-                <label htmlFor="message">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="4"
-                  required
-                  placeholder="Please specify your requirements, questions, or details about your business needs"
-                  disabled={isSubmitting}
-                ></textarea>
-              </div>
-            </div>
-
-            <button 
-              type="submit" 
-              className={`btn btn-primary ${isSubmitting ? 'submitting' : ''}`}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
-            </button>
-          </form>
-        </div>
-      </section>
     </div>
   );
 }
