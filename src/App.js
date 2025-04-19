@@ -23,7 +23,6 @@ const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const Regions = React.lazy(() => import('./pages/Regions'));
 const Wholesale = React.lazy(() => import('./pages/Wholesale'));
-const Offerings = React.lazy(() => import('./pages/Offerings'));
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
       <ScrollToTop />
       <div className="app">
         <Header />
-        <main className="main-content">
+        <main className="main-content page"> {/* Added page class */}
           <Suspense fallback={<LoadingSpinner />}>
             <PageTransition />
             <Routes>
@@ -40,7 +39,6 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/wholesale" element={<Wholesale />} />
-              <Route path="/offerings" element={<Offerings />} />
             </Routes>
           </Suspense>
         </main>

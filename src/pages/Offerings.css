@@ -529,7 +529,7 @@
 
 /* Fade-in animations */
 .fade-on-scroll {
-  opacity: 1; /* Ensure elements are visible by default */
+  opacity: 0; /* Change initial opacity to 0 */
   transform: translateY(30px);
   transition: opacity 1.2s ease, transform 1.2s ease;
 }

@@ -32,7 +32,6 @@ function Header() {
     <>
       <div className="announcement-bar">
         <div className="container">
-          <p>Direct trade with reliable supply chain from Ethiopia's finest coffee regions</p>
         </div>
       </div>
       <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
@@ -52,18 +51,8 @@ function Header() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/offerings" className="nav-link">
-                    Our Offerings
-                  </NavLink>
-                </li>
-                <li>
                   <NavLink to="/about" className="nav-link">
                     About
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/education" className="nav-link">
-                    Education
                   </NavLink>
                 </li>
                 <li>

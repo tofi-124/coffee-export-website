@@ -50,9 +50,7 @@ function Footer() {
                 <h4>Offerings</h4>
                 <nav>
                   <Link to="/regions">Coffee Origins</Link>
-                  <Link to="/offerings">Our Coffees</Link>
                   <Link to="/wholesale">Export Services</Link>
-                  <Link to="/education">Coffee Education</Link>
                 </nav>
               </div>
               
@@ -61,7 +59,6 @@ function Footer() {
                 <nav>
                   <Link to="/about">About Us</Link>
                   <Link to="/contact">Contact</Link>
-                  <a href="/sustainability">Sustainability</a>
                   <a href="/careers">Careers</a>
                 </nav>
               </div>

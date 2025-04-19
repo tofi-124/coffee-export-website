@@ -214,9 +214,6 @@ function Regions() {
                 </div>
               </div>
               
-              <Link to="/offerings" className="region-cta btn-secondary">
-                View Coffee Offerings
-              </Link>
             </div>
             
             <div className="region-image-large">

@@ -147,7 +147,6 @@ function Home() {
                   <div className="offering-tag">{offering.specs}</div>
                   <h3>{offering.name}</h3>
                   <p>{offering.description}</p>
-                  <Link to="/offerings" className="text-link">Explore <i className="fas fa-arrow-right"></i></Link>
                 </div>
               </div>
             ))}
@@ -177,14 +176,6 @@ function Home() {
               </div>
               <h3>Full Traceability</h3>
               <p>Complete documentation from farm to export, honoring the regions and farmers behind each coffee</p>
-            </div>
-            
-            <div className="value-item fade-on-scroll">
-              <div className="value-icon">
-                <i className="fas fa-leaf"></i>
-              </div>
-              <h3>Sustainability</h3>
-              <p>Supporting environmental stewardship and community development across Ethiopian coffee regions</p>
             </div>
           </div>
         </div>

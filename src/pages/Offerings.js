@@ -138,21 +138,15 @@ function Offerings() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Ensure content has rendered before observing
-          setTimeout(() => {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }, 100);
+          observer.unobserve(entry.target); // Optional: Unobserve after visible
         }
       });
     }, { threshold: 0.1 });
     
-    // Wait for DOM to be ready before observing
-    setTimeout(() => {
-      document.querySelectorAll('.fade-on-scroll').forEach(el => {
-        observer.observe(el);
-      });
-    }, 500);
+    // Observe elements directly without setTimeout
+    document.querySelectorAll('.fade-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
     
     return () => observer.disconnect();
   }, []);

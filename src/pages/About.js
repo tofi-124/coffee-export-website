@@ -129,13 +129,6 @@ function About() {
               <p>We believe in building trust through transparency in every transaction. For us, this means full traceability to origin, honest pricing, and open communication with both producers and buyers to create sustainable, long-term partnerships.</p>
             </div>
             
-            <div className="value-card fade-on-scroll">
-              <div className="value-icon">
-                <i className="fas fa-seedling"></i>
-              </div>
-              <h3>Environmental Stewardship</h3>
-              <p>Sustainability is woven into our operations through support for organic farming practices, biodiversity conservation, and climate-resilient agriculture techniques. We believe in protecting Ethiopia's unique coffee ecosystems for future generations.</p>
-            </div>
           </div>
         </div>
       </section>
