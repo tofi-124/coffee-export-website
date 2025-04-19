@@ -138,11 +138,21 @@ function Offerings() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          // Ensure content has rendered before observing
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 100);
         }
       });
     }, { threshold: 0.1 });
     
-    document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
+    // Wait for DOM to be ready before observing
+    setTimeout(() => {
+      document.querySelectorAll('.fade-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+    }, 500);
     
     return () => observer.disconnect();
   }, []);
@@ -172,7 +182,7 @@ function Offerings() {
         {/* Hero Section */}
         <section className="offerings-hero">
           <div className="hero-background">
-            <ImageLoader src="images/products/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
+            <ImageLoader src="/images/products/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
           </div>
           <div className="container">
             <div className="hero-content">
@@ -371,22 +381,22 @@ function Offerings() {
             
             <div className="gallery-grid fade-on-scroll">
               <div className="gallery-item large">
-                <ImageLoader src="images/process/coffee-processing.jpg" alt="Coffee Processing" />
+                <ImageLoader src="/images/process/coffee-processing.jpg" alt="Coffee Processing" />
                 <div className="gallery-caption">
                   <h3>Drying Process</h3>
                   <p>Carefully controlled natural sun-drying on raised beds</p>
                 </div>
               </div>
               <div className="gallery-item">
-                <ImageLoader src="images/process/coffee-cupping.jpg" alt="Coffee Cupping" />
+                <ImageLoader src="/images/process/coffee-cupping.jpg" alt="Coffee Cupping" />
                 <div className="gallery-caption">
                   <h3>Quality Control</h3>
                   <p>Daily cupping sessions ensure consistent quality</p>
                 </div>
               </div>
               <div className="gallery-item">
-                <ImageLoader src="images/process/coffee-packaging.jpg" alt="Coffee Packaging" />
-                <div class="gallery-caption">
+                <ImageLoader src="/images/process/coffee-packaging.jpg" alt="Coffee Packaging" />
+                <div className="gallery-caption">
                   <h3>Export Packaging</h3>
                   <p>GrainPro-lined jute bags preserve coffee freshness</p>
                 </div>
@@ -398,7 +408,7 @@ function Offerings() {
         {/* CTA Section */}
         <section className="cta-section">
           <div className="cta-background">
-            <ImageLoader src="images/products/coffee-pouring.jpg" alt="Coffee Pouring" />
+            <ImageLoader src="/images/products/coffee-pouring.jpg" alt="Coffee Pouring" />
           </div>
           <div className="cta-overlay"></div>
           <div className="container">
