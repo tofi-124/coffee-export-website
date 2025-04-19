@@ -66,6 +66,11 @@ body {
   flex-direction: column;
 }
 
+/* Remove top padding specifically for the wholesale page */
+.page.wholesale-page {
+  padding-top: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Fraunces', serif; /* More distinctive serif for headings */
   color: var(--dark-brown);
@@ -410,6 +415,11 @@ a:hover {
 
   .page {
     padding-top: 106px; /* Smaller header height (70px) + announcement bar height (36px) */
+  }
+
+  /* Also remove top padding for wholesale page on smaller screens */
+  .page.wholesale-page {
+    padding-top: 0;
   }
 }
 

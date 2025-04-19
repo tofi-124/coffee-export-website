@@ -17,15 +17,29 @@ function Header() {
 
     // Close menu when route changes
     setIsMenuOpen(false);
+    // Reset body scroll on route change if menu was open
+    document.body.style.overflow = 'auto';
 
     window.addEventListener('scroll', handleScroll);
+    // Initial check in case the page loads scrolled
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled, location]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     // Prevent body scroll when menu is open
-    document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : 'auto';
+  };
+
+  // Determine if the header should always be in the 'scrolled' state based on the path
+  const alwaysScrolled = location.pathname === '/wholesale';
+
+  // Close menu and restore body scroll if backdrop is clicked
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -34,7 +48,7 @@ function Header() {
         <div className="container">
         </div>
       </div>
-      <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
+      <header className={`header ${scrolled || alwaysScrolled ? 'header-scrolled' : ''}`}>
         <div className="container">
           <div className="header-inner">
             <div className="header-logo">
@@ -93,7 +107,7 @@ function Header() {
           </div>
         </div>
       </header>
-      {isMenuOpen && <div className="menu-backdrop" onClick={toggleMenu}></div>}
+      {isMenuOpen && <div className="menu-backdrop" onClick={closeMenu}></div>}
     </>
   );
 }

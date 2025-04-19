@@ -65,9 +65,9 @@
 
 /* Section Styling - Use global variables */
 .wholesale-intro,
-.quality-standards,
-.wholesale-form, /* Renamed from .wholesale-form-section for consistency */
-.contact-offices {
+.wholesale-content, /* Combined form and offices */
+.contact-offices /* Keep if used separately, otherwise remove */
+{
   padding: var(--section-padding-desktop); /* Use global variable */
 }
 
@@ -75,17 +75,13 @@
   background-color: var(--background-light);
 }
 
-.quality-standards {
-  background-color: var(--light-text);
-}
+/* REMOVED .quality-standards background */
 
-.wholesale-form {
+.wholesale-content { /* Style for the combined section */
   background-color: var(--background-light);
 }
 
-.contact-offices {
-   background-color: var(--background-light);
-}
+/* REMOVED .contact-offices background if it's part of wholesale-content */
 
 
 /* Intro Grid */
@@ -149,101 +145,70 @@
 }
 
 
-/* Quality Standards - Use global card styles if possible */
-.standards-grid {
+/* REMOVED Quality Standards styles */
+/* .standards-grid { ... } */
+/* .standard-card { ... } */
+/* .standard-card:hover { ... } */
+/* .standard-card h3 { ... } */
+/* .standard-card p { ... } */
+
+
+/* Contact Grid (Form + Info) */
+.contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--grid-gap-medium); /* Use global variable */
-  margin-top: 3rem;
+  grid-template-columns: 2fr 1fr; /* Adjust ratio as needed */
+  gap: var(--grid-gap-large);
+  align-items: flex-start; /* Align items to the top */
 }
 
-/* Apply global card and hover styles */
-.standard-card {
+/* Contact Info (Right side) */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap-medium);
+}
+
+/* Info Card (Used for office details) */
+.info-card {
   background: var(--light-text);
-  padding: var(--card-padding-desktop); /* Use global variable */
-  border-radius: var(--border-radius-medium); /* Use global variable */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Consistent shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Use global transition */
+  padding: var(--card-padding-desktop);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--shadow-subtle);
 }
 
-.standard-card:hover {
-  transform: translateY(-8px); /* Consistent hover effect */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Consistent hover shadow */
-}
-
-.standard-card h3 {
-  /* Use global h3 styles or keep specific */
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  color: var(--dark-brown);
-}
-
-.standard-card p {
-  /* Use global p styles or keep specific */
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-/* Contact Offices - Use global card styles */
-.offices-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--grid-gap-medium); /* Use global variable */
-  margin-top: 2rem;
-}
-
-/* Apply global card and hover styles */
-.office-card {
-  background: var(--light-text);
-  padding: var(--card-padding-desktop); /* Use global variable */
-  border-radius: var(--border-radius-medium); /* Use global variable */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Consistent shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Use global transition */
-}
-
-.office-card:hover {
-  transform: translateY(-8px); /* Consistent hover effect */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Consistent hover shadow */
-}
-
-.office-card h3 {
-  /* Use global h3 styles or keep specific */
+.info-header h3 {
   color: var(--dark-brown);
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.8rem;
 }
 
-.office-card p {
-  /* Use global p styles or keep specific */
-  margin-bottom: 1rem;
+.info-body p {
+  margin-bottom: 0.8rem;
   line-height: 1.6;
   color: var(--text-color);
+  font-size: 0.95rem;
 }
 
-.office-card strong {
+.info-body strong {
   color: var(--dark-brown);
-  font-weight: 500; /* Consistent weight */
+  font-weight: 500;
 }
 
-
-/* Wholesale Form Section - Use global form styles */
-/* Remove .form-container if structure uses .container directly */
-/* .form-container { ... } */
-
-.contact-form { /* Assuming this class is on the form element */
-   max-width: 900px; /* Or adjust as needed */
-   margin: 3rem auto 0; /* Add top margin */
-   padding: var(--card-padding-desktop); /* Use global variable */
-   background: var(--light-text);
-   border-radius: var(--border-radius-medium); /* Use global variable */
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+/* Wholesale Form Section (Left side) */
+.contact-form { /* Styles for the <form> element */
+  background: var(--light-text);
+  padding: var(--card-padding-desktop);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--shadow-subtle);
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--grid-gap-medium); /* Use global variable */
-  margin-bottom: 2rem; /* Add margin below grid */
+  gap: var(--grid-gap-medium);
+  margin-bottom: 2rem;
 }
 
 /* Use global .form-group styles */
@@ -275,9 +240,7 @@
 /* Responsive Styles - Adjust based on global breakpoints and variables */
 @media (max-width: 968px) {
   .wholesale-intro,
-  .quality-standards,
-  .wholesale-form,
-  .contact-offices {
+  .wholesale-content {
     padding: var(--section-padding-tablet); /* Use global variable */
   }
 
@@ -291,8 +254,12 @@
     order: -1; /* Keep if needed */
   }
 
-  .standard-card,
-  .office-card,
+  .contact-grid {
+    grid-template-columns: 1fr; /* Stack form and info */
+    gap: var(--grid-gap-medium);
+  }
+
+  .info-card,
   .contact-form {
      padding: var(--card-padding-tablet); /* Use global variable */
   }
@@ -308,9 +275,7 @@
   }
 
   .wholesale-intro,
-  .quality-standards,
-  .wholesale-form,
-  .contact-offices {
+  .wholesale-content {
     padding: var(--section-padding-mobile); /* Use global variable */
   }
 
@@ -322,14 +287,9 @@
     gap: var(--grid-gap-small); /* Use global variable */
   }
 
-  .standard-card,
-  .office-card,
+  .info-card,
   .contact-form {
      padding: var(--card-padding-mobile); /* Use global variable */
-  }
-
-  .offices-grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -346,14 +306,11 @@
   }
 
    .wholesale-intro,
-  .quality-standards,
-  .wholesale-form,
-  .contact-offices {
+  .wholesale-content {
     padding: var(--section-padding-xs); /* Use global variable */
   }
 
-   .standard-card,
-  .office-card,
+   .info-card,
   .contact-form {
      padding: var(--card-padding-xs); /* Use global variable */
   }

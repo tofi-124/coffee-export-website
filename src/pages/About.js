@@ -128,6 +128,14 @@ function About() {
               <h3>Transparent Relationships</h3>
               <p>We believe in building trust through transparency in every transaction. For us, this means full traceability to origin, honest pricing, and open communication with both producers and buyers to create sustainable, long-term partnerships.</p>
             </div>
+
+            <div className="value-card fade-on-scroll">
+              <div className="value-icon">
+                <i className="fas fa-handshake"></i>
+              </div>
+              <h3>Transparent Relationships</h3>
+              <p>We believe in building trust through transparency in every transaction. For us, this means full traceability to origin, honest pricing, and open communication with both producers and buyers to create sustainable, long-term partnerships.</p>
+            </div>
             
           </div>
         </div>
@@ -345,8 +353,7 @@ function About() {
             <h2>Partner with Us</h2>
             <p>Connect with our team to discuss your Ethiopian coffee sourcing needs</p>
             <div className="cta-buttons">
-              <Link to="/wholesale" className="btn btn-primary">Get Export Quote</Link>
-              <Link to="/contact" className="btn btn-secondary">Contact Our Team</Link>
+              <Link to="/contact" className="btn btn-primary">Contact Our Team</Link>
             </div>
           </div>
         </div>

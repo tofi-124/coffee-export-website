@@ -367,31 +367,6 @@ function Wholesale() {
         </div>
       </section>
 
-      <section className="quality-standards section fade-on-scroll">
-        <div className="container">
-          <h2 className="section-title">Export Standards</h2>
-          <div className="standards-grid">
-            <div className="standard-card">
-              <h3>Quality Standards</h3>
-              <p>Specialty Grade: 85+ points, 0-3 defects/300g</p>
-              <p>Commercial Grade: ECX standards compliant</p>
-            </div>
-            <div className="standard-card">
-              <h3>Documentation</h3>
-              <p>ECX Contract, Certificate of Origin, Phytosanitary Certificate, ICO Certificate of Origin</p>
-            </div>
-            <div className="standard-card">
-              <h3>Packaging Options</h3>
-              <p>60kg GrainPro lined jute bags, Vacuum-sealed options available</p>
-            </div>
-            <div className="standard-card">
-              <h3>Export Markets</h3>
-              <p>EU, USA, Middle East, Asia Pacific and custom market requirements</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }
