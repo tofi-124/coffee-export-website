@@ -287,7 +287,11 @@
 @media (max-width: 768px) {
   .header {
     padding: 1.25rem 0;
-    top: 28px; /* Smaller announcement bar on mobile */
+    position: fixed;
+    top: 0; /* Changed from 28px to 0 to make it stick properly on mobile */
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 
   .header-scrolled {
@@ -297,6 +301,9 @@
   .announcement-bar {
     font-size: 0.75rem;
     padding: 0.4rem 0;
+    /* Add position fixed for announcement bar */
+    position: relative;
+    top: 0;
   }
 }
 

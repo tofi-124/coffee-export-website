@@ -86,8 +86,16 @@ const regionData = [
 
 function Regions() {
   const [activeRegion, setActiveRegion] = useState('yirgacheffe');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   
   useEffect(() => {
+    // Check for mobile screen size
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
     // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -99,19 +107,31 @@ function Regions() {
     
     document.querySelectorAll('.fade-on-scroll').forEach(el => observer.observe(el));
     
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const handleRegionClick = (regionId) => {
     setActiveRegion(regionId);
     
-    // Use setTimeout to ensure state update completes before scrolling
+    // Immediate scroll on mobile to avoid double-click issue
+    if (isMobile) {
+      const detailsElement = document.getElementById('region-details');
+      if (detailsElement) {
+        detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
+    
+    // Use setTimeout for desktop to ensure state update completes before scrolling
     setTimeout(() => {
       const detailsElement = document.getElementById('region-details');
       if (detailsElement) {
         detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 0); // Delay of 0ms pushes execution to the next tick
+    }, 0);
   };
 
   const selectedRegion = regionData.find(region => region.id === activeRegion);
@@ -153,6 +173,7 @@ function Regions() {
                 key={region.id} 
                 className={`region-card fade-on-scroll ${activeRegion === region.id ? 'active' : ''}`}
                 onClick={() => handleRegionClick(region.id)}
+                onTouchStart={() => isMobile && handleRegionClick(region.id)}
               >
                 <div className="region-image">
                   <ImageLoader src={region.image} alt={`${region.name} Coffee`} />
