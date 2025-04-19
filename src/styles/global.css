@@ -28,8 +28,8 @@
   --card-padding-mobile: 1.5rem;
   --card-padding-xs: 1rem;
   --border-radius-large: 0; /* More modern, straight edges */
-  --border-radius-medium: 0;
-  --border-radius-small: 0;
+  --border-radius-medium: 8px; /* Consistent medium radius */
+  --border-radius-small: 4px; /* Consistent small radius */
   --button-border-radius: 2px; /* Very slight radius for buttons only */
   --min-touch-target: 44px;
   --container-padding-desktop: 0 2.5rem;

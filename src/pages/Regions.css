@@ -146,7 +146,7 @@
 .region-card {
   position: relative;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
@@ -241,7 +241,7 @@
   color: var(--light-text);
   padding: 0.3rem 0.8rem;
   font-size: 0.85rem;
-  border-radius: 20px;
+  border-radius: var(--border-radius-small);
   margin-bottom: 1rem;
 }
 
@@ -252,6 +252,8 @@
   margin-bottom: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  /* Standard line-clamp for compatibility */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   transition: all 0.4s ease;
@@ -269,7 +271,7 @@
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
   padding: 0.7rem 1.5rem;
-  border-radius: 30px;
+  border-radius: var(--border-radius-small);
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
@@ -392,7 +394,7 @@
   background-color: transparent;
   border: 2px solid var(--dark-brown);
   color: var(--dark-brown);
-  border-radius: 30px;
+  border-radius: var(--border-radius-small);
   font-weight: 600;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -409,7 +411,7 @@
 }
 
 .region-image-large {
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -464,7 +466,7 @@
 .map-container {
   max-width: 1000px;
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -506,7 +508,7 @@
 .feature-card {
   text-align: center;
   padding: 3rem 2rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius-medium);
   background-color: var(--background-light);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -604,7 +606,7 @@
 .btn-primary,
 .btn-secondary {
   padding: 0.9rem 1.8rem;
-  border-radius: 30px;
+  border-radius: var(--border-radius-small);
   font-weight: 600;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -739,6 +741,8 @@
   .region-preview-desc {
     font-size: 0.9rem;
     -webkit-line-clamp: 2;
+    /* Standard line-clamp for compatibility */
+    line-clamp: 2;
   }
   
   .region-image-large img {

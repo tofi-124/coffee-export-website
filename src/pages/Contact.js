@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Contact.css';
 
 function Contact() {
@@ -17,6 +17,41 @@ function Contact() {
     error: false,
     message: ''
   });
+  
+  // References for scroll animations
+  const formRef = useRef(null);
+  const infoCardsRef = useRef([]);
+  
+  // Setup intersection observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-on-scroll');
+          entry.target.style.setProperty('--scroll-index', entry.target.dataset.index || 0);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe form container
+    if (formRef.current) {
+      observer.observe(formRef.current);
+    }
+    
+    // Observe info cards
+    document.querySelectorAll('.info-card').forEach((card, index) => {
+      card.dataset.index = index;
+      observer.observe(card);
+    });
+    
+    return () => observer.disconnect();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -60,20 +95,29 @@ function Contact() {
   return (
     <div className="contact-page">
       <section className="contact-hero">
+        <div className="hero-background">
+          <img src="/images/hero/coffee-plantation.jpg" alt="Ethiopian Coffee Plantation" />
+        </div>
         <div className="container">
-          <h1>Contact Us</h1>
+          <div className="hero-content">
+            <span className="hero-tagline">GET IN TOUCH</span>
+            <h1>Contact Us</h1>
+            <p>Whether you're a coffee roaster looking to source Ethiopian beans or have questions about our offerings, we're here to help.</p>
+          </div>
         </div>
       </section>
 
       <section className="contact-content">
         <div className="container">
-          <div className="contact-grid">
-            <div className="contact-form-container">
-              <h2>Get in Touch</h2>
-              <p className="contact-intro">
-                Whether you're a coffee roaster looking to source Ethiopian beans, a distributor interested in partnership, or simply have questions about Ethiopian coffee, we're here to help.
-              </p>
+          <div className="section-header text-center">
+            <h2 className="section-title line-after">How Can We Help You?</h2>
+            <p className="section-subtitle">
+              Our team is ready to answer any questions about Ethiopian coffee, sourcing, and export procedures.
+            </p>
+          </div>
 
+          <div className="contact-grid">
+            <div className="contact-form-container" ref={formRef}>
               {formStatus.submitted ? (
                 <div className="form-success-message">
                   <p>{formStatus.message}</p>
@@ -96,6 +140,7 @@ function Contact() {
                         value={formData.name}
                         onChange={handleInputChange}
                         required
+                        placeholder="Enter your full name"
                       />
                     </div>
                     <div className="form-group">
@@ -107,6 +152,7 @@ function Contact() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
+                        placeholder="example@domain.com"
                       />
                     </div>
                   </div>
@@ -120,6 +166,7 @@ function Contact() {
                         name="company"
                         value={formData.company}
                         onChange={handleInputChange}
+                        placeholder="Your company name"
                       />
                     </div>
                     <div className="form-group">
@@ -132,9 +179,9 @@ function Contact() {
                       >
                         <option value="">Select your role</option>
                         <option value="Roaster">Coffee Roaster</option>
+                        <option value="Buyer">Coffee Buyer</option>
                         <option value="Importer">Coffee Importer</option>
-                        <option value="Distributor">Coffee Distributor</option>
-                        <option value="Cafe Owner">Cafe Owner</option>
+                        <option value="Cafe Owner">Café Owner</option>
                         <option value="Other">Other</option>
                       </select>
                     </div>
@@ -150,58 +197,70 @@ function Contact() {
                         value={formData.country}
                         onChange={handleInputChange}
                         required
+                        placeholder="Your country"
                       />
                     </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Interested in:</label>
-                    <div className="checkbox-group">
-                      <div className="checkbox-item">
-                        <input
-                          type="checkbox"
-                          id="specialty"
-                          name="coffeeType"
-                          value="Specialty"
-                          onChange={handleCheckboxChange}
-                          checked={formData.coffeeType.includes('Specialty')}
-                        />
-                        <label htmlFor="specialty">Specialty Coffee</label>
-                      </div>
-                      <div className="checkbox-item">
-                        <input
-                          type="checkbox"
-                          id="commercial"
-                          name="coffeeType"
-                          value="Commercial"
-                          onChange={handleCheckboxChange}
-                          checked={formData.coffeeType.includes('Commercial')}
-                        />
-                        <label htmlFor="commercial">Commercial Grade</label>
-                      </div>
-                      <div className="checkbox-item">
-                        <input
-                          type="checkbox"
-                          id="organic"
-                          name="coffeeType"
-                          value="Organic"
-                          onChange={handleCheckboxChange}
-                          checked={formData.coffeeType.includes('Organic')}
-                        />
-                        <label htmlFor="organic">Organic Certified</label>
+                    <div className="form-group">
+                      <label>Interested In</label>
+                      <div className="checkbox-group">
+                        <div className="checkbox-item">
+                          <input
+                            type="checkbox"
+                            id="washed"
+                            name="coffeeType"
+                            value="Washed"
+                            onChange={handleCheckboxChange}
+                            checked={formData.coffeeType.includes('Washed')}
+                          />
+                          <label htmlFor="washed">Washed</label>
+                        </div>
+                        <div className="checkbox-item">
+                          <input
+                            type="checkbox"
+                            id="natural"
+                            name="coffeeType"
+                            value="Natural"
+                            onChange={handleCheckboxChange}
+                            checked={formData.coffeeType.includes('Natural')}
+                          />
+                          <label htmlFor="natural">Natural</label>
+                        </div>
+                        <div className="checkbox-item">
+                          <input
+                            type="checkbox"
+                            id="honey"
+                            name="coffeeType"
+                            value="Honey"
+                            onChange={handleCheckboxChange}
+                            checked={formData.coffeeType.includes('Honey')}
+                          />
+                          <label htmlFor="honey">Honey</label>
+                        </div>
+                        <div className="checkbox-item">
+                          <input
+                            type="checkbox"
+                            id="experimental"
+                            name="coffeeType"
+                            value="Experimental"
+                            onChange={handleCheckboxChange}
+                            checked={formData.coffeeType.includes('Experimental')}
+                          />
+                          <label htmlFor="experimental">Experimental</label>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="message">Message *</label>
+                    <label htmlFor="message">Your Message *</label>
                     <textarea
                       id="message"
                       name="message"
-                      rows="5"
+                      rows="6"
                       value={formData.message}
                       onChange={handleInputChange}
                       required
+                      placeholder="How can we help you today?"
                     ></textarea>
                   </div>
 
@@ -215,61 +274,68 @@ function Contact() {
             <div className="contact-info">
               <div className="info-card">
                 <div className="info-header">
-                  <h3>Export Office</h3>
+                  <h3>Head Office</h3>
                 </div>
                 <div className="info-body">
                   <p>
-                    <strong>Address:</strong><br />
-                    Gudumale Building, Floor 3<br />
-                    Bole Road, Jakros Area<br />
+                    <strong>Address:</strong> Bole Road, Business District<br />
                     Addis Ababa, Ethiopia
                   </p>
                   <p>
-                    <strong>Phone:</strong><br />
-                    +251 911 234 567
+                    <strong>Phone:</strong> +251 11 234 5678<br />
+                    <strong>Email:</strong> info@ethiopiancoffeeexporters.com
                   </p>
                   <p>
-                    <strong>Email:</strong><br />
-                    exports@ethiocoffeeimportexport.com
-                  </p>
-                  <p>
-                    <strong>Business Hours:</strong><br />
-                    Monday–Friday: 9:00am – 5:30pm<br />
-                    Saturday: 9:00am – 1:00pm<br />
-                    Sunday: Closed
+                    <strong>Hours:</strong> Monday – Friday: 8:30am – 5:00pm<br />
+                    Saturday: 9:00am – 1:00pm
                   </p>
                 </div>
               </div>
-              
+
               <div className="info-card">
                 <div className="info-header">
-                  <h3>Coffee Questions?</h3>
+                  <h3>Export Inquiries</h3>
                 </div>
                 <div className="info-body">
-                  <p>Our coffee specialists are available to answer your questions about Ethiopian coffee, processing methods, and export procedures.</p>
                   <p>
-                    <strong>WhatsApp:</strong> +251 911 234 567<br />
-                    <strong>Skype:</strong> ethiocoffee.export
+                    <strong>Contact:</strong> Alem Bekele, Export Director<br />
+                    <strong>Email:</strong> exports@ethiopiancoffeeexporters.com<br />
+                    <strong>Phone:</strong> +251 11 234 5680
                   </p>
+                  <p>For inquiries about bulk orders, shipping, and logistics.</p>
+                </div>
+              </div>
+
+              <div className="info-card">
+                <div className="info-header">
+                  <h3>Sample Requests</h3>
+                </div>
+                <div className="info-body">
+                  <p>
+                    <strong>Contact:</strong> Sara Haile, Quality Control<br />
+                    <strong>Email:</strong> samples@ethiopiancoffeeexporters.com<br />
+                    <strong>Phone:</strong> +251 11 234 5681
+                  </p>
+                  <p>Request samples of our specialty coffee offerings.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      
+
       <section className="map-section">
         <div className="map-container">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125759.82373549152!2d38.68164995612014!3d9.010774465653578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1649673726417!5m2!1sen!2sus"
-            width="100%"
-            height="450"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Office Location"
-          ></iframe>
+          <iframe 
+            title="Ethiopian Coffee Exporters Office Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5468615015785!2d38.79979601478475!3d9.012854593532141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sBole%20Rd%2C%20Addis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1649946825800!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </section>
     </div>
