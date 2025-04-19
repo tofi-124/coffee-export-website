@@ -22,7 +22,7 @@ const offerings = [
       screen: '15+',
       processing: 'Eco-washed, 12-24hr fermentation'
     },
-    image: 'images/products/yirgacheffe-natural.jpg',
+    image: '/images/products/yirgacheffe-natural.jpg',
     flavorProfile: ['Floral', 'Citrus', 'Bergamot', 'Stone Fruit']
   },
   {
@@ -42,7 +42,7 @@ const offerings = [
       screen: '15+',
       processing: 'Natural sun-dried, 15-21 days'
     },
-    image: 'images/products/sidamo-washed.jpg',
+    image: '/images/products/sidamo-washed.jpg',
     flavorProfile: ['Blueberry', 'Dark Chocolate', 'Wine', 'Sweet']
   },
   {
@@ -62,7 +62,7 @@ const offerings = [
       screen: '16+',
       processing: 'Natural sun-dried, 18-21 days'
     },
-    image: 'images/products/coffee-cherries.jpg',
+    image: '/images/products/coffee-cherries.jpg',
     flavorProfile: ['Floral', 'Tropical Fruit', 'Honey', 'Complex']
   },
   {
@@ -82,7 +82,7 @@ const offerings = [
       screen: '15+',
       processing: 'Traditional natural process'
     },
-    image: 'images/products/coffee-beans-roasted.jpg',
+    image: '/images/products/coffee-beans-roasted.jpg',
     flavorProfile: ['Berry', 'Mocha', 'Spice', 'Exotic']
   },
   {
@@ -102,7 +102,7 @@ const offerings = [
       screen: '13+',
       processing: 'Eco-washed'
     },
-    image: 'images/products/coffee-pouring.jpg',
+    image: '/images/products/coffee-pouring.jpg',
     flavorProfile: ['Red Wine', 'Spice', 'Chocolate', 'Sweet']
   },
   {
@@ -122,7 +122,7 @@ const offerings = [
       screen: '15+',
       processing: 'Traditional natural process'
     },
-    image: 'images/products/cupping-session.jpg',
+    image: '/images/products/cupping-session.jpg',
     flavorProfile: ['Herbal', 'Berry', 'Chocolate', 'Bright']
   }
 ];
@@ -386,7 +386,7 @@ function Offerings() {
               </div>
               <div className="gallery-item">
                 <ImageLoader src="images/process/coffee-packaging.jpg" alt="Coffee Packaging" />
-                <div className="gallery-caption">
+                <div class="gallery-caption">
                   <h3>Export Packaging</h3>
                   <p>GrainPro-lined jute bags preserve coffee freshness</p>
                 </div>
