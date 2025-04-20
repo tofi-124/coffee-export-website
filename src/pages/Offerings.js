@@ -87,6 +87,14 @@ const regionData = [
 function Offerings() {
   const [activeRegion, setActiveRegion] = useState('yirgacheffe');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [sampleFormData, setSampleFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    selectedSamples: [],
+    message: ''
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
   
   useEffect(() => {
     // Check for mobile screen size
@@ -132,6 +140,64 @@ function Offerings() {
         detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 0);
+  };
+
+  const handleSampleSelection = (e) => {
+    // Convert the HTMLCollection to an array and get the selected options
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    const selectedValues = selectedOptions.map(option => option.value);
+    
+    setSampleFormData(prevState => ({
+      ...prevState,
+      selectedSamples: selectedValues
+    }));
+  };
+
+  const toggleSampleSelection = (regionId) => {
+    setSampleFormData(prevState => {
+      const isSelected = prevState.selectedSamples.includes(regionId);
+      
+      if (isSelected) {
+        // Remove from selection
+        return {
+          ...prevState,
+          selectedSamples: prevState.selectedSamples.filter(id => id !== regionId)
+        };
+      } else {
+        // Add to selection
+        return {
+          ...prevState,
+          selectedSamples: [...prevState.selectedSamples, regionId]
+        };
+      }
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSampleFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSampleFormSubmit = (e) => {
+    e.preventDefault();
+    // Here you would normally send the form data to your server
+    console.log('Sample Request Form Data:', sampleFormData);
+    setFormSubmitted(true);
+    
+    // Reset form after submission (you might want to keep the selection)
+    setTimeout(() => {
+      setSampleFormData({
+        name: '',
+        email: '',
+        company: '',
+        selectedSamples: [], // Reset selections
+        message: ''
+      });
+      setFormSubmitted(false);
+    }, 3000);
   };
 
   const selectedRegion = regionData.find(offering => offering.id === activeRegion);
@@ -184,9 +250,11 @@ function Offerings() {
                     <h3>{offering.name}</h3>
                     <div className="offering-badge">{offering.altitude}</div>
                     <p className="offering-preview-desc">{offering.description}</p>
-                    <button className="offering-view-btn">
-                      {activeRegion === offering.id ? 'Currently Viewing' : 'View Region'}
-                    </button>
+                    <div className="offering-buttons">
+                      <button className="offering-view-btn">
+                        {activeRegion === offering.id ? 'Currently Viewing' : 'View Region'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -249,23 +317,125 @@ function Offerings() {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="offerings-map-section">
+      {/* Sample Request Form Section */}
+      <section className="sample-request-section fade-on-scroll">
         <div className="container">
-          <div className="section-header fade-on-scroll">
-            <h2 className="section-title line-after text-center">Geography of Flavor</h2>
-            <p className="section-subtitle">Ethiopia's varied landscapes and climates create distinct coffee characteristics across offerings</p>
+          <div className="section-header">
+            <h2 className="section-title line-after text-center">Request Coffee Samples</h2>
+            <p className="section-subtitle">Select the regions you're interested in and we'll send you samples to evaluate</p>
           </div>
           
-          <div className="map-container fade-on-scroll">
-            <ImageLoader 
-              src="/images/products/coffee-plantation.jpg" 
-              alt="Ethiopian Coffee Regions Map" 
-            />
-            <div className="map-caption">
-              <p>Ethiopia's main coffee growing offerings span diverse altitudes and climates</p>
+          <form className="sample-request-form" onSubmit={handleSampleFormSubmit}>
+            <div className="form-grid">
+              <div className="form-group">
+                <label htmlFor="name">Full Name*</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  value={sampleFormData.name} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="email">Email Address*</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  value={sampleFormData.email} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="company">Company Name*</label>
+                <input 
+                  type="text" 
+                  id="company" 
+                  name="company" 
+                  value={sampleFormData.company} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+              </div>
+              
+              <div className="form-group full-width">
+                <label>Select Coffee Regions*</label>
+                <p className="select-helper-text">
+                  Select the coffee regions you would like to receive samples from:
+                </p>
+                <div className="coffee-regions-selector">
+                  {regionData.map(region => (
+                    <div 
+                      key={region.id}
+                      className={`region-checkbox-item ${sampleFormData.selectedSamples.includes(region.id) ? 'selected' : ''}`}
+                      onClick={() => toggleSampleSelection(region.id)}
+                    >
+                      <div className="region-checkbox">
+                        {sampleFormData.selectedSamples.includes(region.id) && (
+                          <i className="fas fa-check"></i>
+                        )}
+                      </div>
+                      <div className="region-info">
+                        <span className="region-name">{region.name}</span>
+                        <span className="region-details">{region.processing} • {region.altitude}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {/* Hidden select field to maintain form validation */}
+                <select 
+                  id="selectedSamples" 
+                  name="selectedSamples" 
+                  value={sampleFormData.selectedSamples} 
+                  onChange={handleSampleSelection} 
+                  multiple 
+                  required
+                  className="hidden-select"
+                >
+                  {regionData.map(region => (
+                    <option key={region.id} value={region.id}>
+                      {region.name}
+                    </option>
+                  ))}
+                </select>
+                {sampleFormData.selectedSamples.length === 0 && (
+                  <div className="form-validation-message">Please select at least one region</div>
+                )}
+              </div>
+              
+              <div className="form-group full-width">
+                <label htmlFor="message">Additional Information</label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows="4" 
+                  value={sampleFormData.message} 
+                  onChange={handleInputChange} 
+                  placeholder="Tell us about your specific requirements, quantity needs, or any questions..."
+                ></textarea>
+              </div>
             </div>
-          </div>
+            
+            <div className="form-submit">
+              <button 
+                type="submit" 
+                className="btn btn-primary"
+                disabled={sampleFormData.selectedSamples.length === 0}
+              >
+                Submit Sample Request
+              </button>
+              {formSubmitted && (
+                <div className="form-feedback success">
+                  <p>Thank you! Your sample request has been submitted. Our team will contact you shortly.</p>
+                </div>
+              )}
+            </div>
+          </form>
         </div>
       </section>
 
