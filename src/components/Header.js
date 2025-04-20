@@ -56,8 +56,8 @@ function Header() {
             <nav className={`main-nav ${isMenuOpen ? 'menu-open' : ''}`}>
               <ul className="nav-list">
                 <li>
-                  <NavLink to="/regions" className="nav-link">
-                    Coffee Origins
+                  <NavLink to="/offerings" className="nav-link">
+                    Offerings
                   </NavLink>
                 </li>
                 <li>

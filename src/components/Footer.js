@@ -49,7 +49,7 @@ function Footer() {
               <div className="footer-nav-group">
                 <h4>Offerings</h4>
                 <nav>
-                  <Link to="/regions">Coffee Origins</Link>
+                  <Link to="/offerings">Offerings</Link>
                   <Link to="/wholesale">Export Services</Link>
                 </nav>
               </div>

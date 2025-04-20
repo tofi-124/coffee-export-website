@@ -1,4 +1,4 @@
-.regions-page {
+.offerings-page {
   padding-top: 0;
   min-height: 100vh;
   display: flex;
@@ -6,7 +6,7 @@
 }
 
 /* Hero Section */
-.regions-hero {
+.offerings-hero {
   position: relative;
   height: 70vh;
   min-height: 550px;
@@ -129,13 +129,13 @@
   padding: 0 2rem;
 }
 
-/* Regions Gallery */
-.regions-gallery {
+/* offerings Gallery */
+.offerings-gallery {
   padding: 3rem 0 6rem;
   background-color: var(--background-light);
 }
 
-.regions-grid {
+.offerings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.5rem;
@@ -143,7 +143,7 @@
   margin: 0 auto;
 }
 
-.region-card {
+.offering-card {
   position: relative;
   cursor: pointer;
   border-radius: var(--border-radius-medium);
@@ -153,17 +153,17 @@
   height: 450px;
 }
 
-.region-card:hover {
+.offering-card:hover {
   transform: translateY(-12px);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
-.region-card.active {
+.offering-card.active {
   transform: translateY(-12px);
   box-shadow: 0 30px 60px rgba(26, 13, 9, 0.3);
 }
 
-.region-card.active::after {
+.offering-card.active::after {
   content: '';
   position: absolute;
   bottom: -20px;
@@ -177,7 +177,7 @@
   z-index: 10;
 }
 
-.region-image {
+.offering-image {
   position: absolute;
   top: 0;
   left: 0;
@@ -187,44 +187,44 @@
   z-index: 6; /* Lift image and name above overlay */
 }
 
-.region-image img {
+.offering-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
 
-.region-card:hover .region-image img {
+.offering-card:hover .offering-image img {
   transform: scale(1.05);
 }
 
-.region-overlay {
+.offering-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(26, 13, 9, 0.85));
-  z-index: 5; /* Place overlay below region-image-name */
+  z-index: 5; /* Place overlay below offering-image-name */
   display: flex;
   align-items: flex-end;
   padding: 2.5rem;
   transition: all 0.4s ease;
 }
 
-.region-card:hover .region-overlay {
+.offering-card:hover .offering-overlay {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(26, 13, 9, 0.95));
 }
 
-.region-card.active .region-overlay {
+.offering-card.active .offering-overlay {
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(26, 13, 9, 0.98));
 }
 
-.region-preview-content {
+.offering-preview-content {
   width: 100%;
 }
 
-.region-overlay h3 {
+.offering-overlay h3 {
   color: var(--light-text);
   font-size: 2rem;
   margin: 0 0 1rem;
@@ -233,11 +233,11 @@
   transition: transform 0.4s ease;
 }
 
-.region-card:hover .region-overlay h3 {
+.offering-card:hover .offering-overlay h3 {
   transform: translateY(-5px);
 }
 
-.region-badge {
+.offering-badge {
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.15);
   color: var(--light-text);
@@ -247,7 +247,7 @@
   margin-bottom: 1rem;
 }
 
-.region-preview-desc {
+.offering-preview-desc {
   color: var(--light-text);
   opacity: 0.8;
   font-size: 0.95rem;
@@ -263,12 +263,12 @@
   line-height: 1.6;
 }
 
-.region-card:hover .region-preview-desc {
+.offering-card:hover .offering-preview-desc {
   max-height: 100px;
   opacity: 0.9;
 }
 
-.region-view-btn {
+.offering-view-btn {
   background: transparent;
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
@@ -282,24 +282,24 @@
   transform: translateY(20px);
 }
 
-.region-card:hover .region-view-btn {
+.offering-card:hover .offering-view-btn {
   opacity: 1;
   transform: translateY(0);
 }
 
-.region-card.active .region-view-btn {
+.offering-card.active .offering-view-btn {
   background-color: var(--accent-color);
   color: var(--dark-brown);
   opacity: 1;
   transform: translateY(0);
 }
 
-.region-view-btn:hover {
+.offering-view-btn:hover {
   background-color: var(--accent-color);
   color: var(--dark-brown);
 }
 
-.region-image-name {
+.offering-image-name {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -310,17 +310,17 @@
   text-align: center;
   font-weight: 600;
   font-family: 'Fraunces', serif;
-  z-index: 10; /* Ensure name overlay is above region overlay */
+  z-index: 10; /* Ensure name overlay is above offering overlay */
 }
 
 /* Region Details */
-.region-details {
+.offering-details {
   padding: 7rem 0;
   background-color: var(--light-text);
   position: relative;
 }
 
-.region-content {
+.offering-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
@@ -329,11 +329,11 @@
   margin: 0 auto;
 }
 
-.region-title-area {
+.offering-title-area {
   margin-bottom: 2rem;
 }
 
-.region-subtitle {
+.offering-subtitle {
   font-size: 0.9rem;
   letter-spacing: 0.15em;
   color: var(--accent-color);
@@ -342,7 +342,7 @@
   font-weight: 600;
 }
 
-.region-info h2 {
+.offering-info h2 {
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   margin-bottom: 1rem;
   color: var(--dark-brown);
@@ -351,21 +351,21 @@
   line-height: 1.2;
 }
 
-.region-divider {
+.offering-divider {
   width: 60px;
   height: 3px;
   background-color: var(--accent-color);
   margin-bottom: 2rem;
 }
 
-.region-description {
+.offering-description {
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 2.5rem;
   color: var(--text-color);
 }
 
-.region-specs {
+.offering-specs {
   margin-bottom: 3rem;
 }
 
@@ -405,7 +405,7 @@
   padding-left: 18px;
 }
 
-.region-cta {
+.offering-cta {
   padding: 0.9rem 1.8rem;
   background-color: transparent;
   border: 2px solid var(--dark-brown);
@@ -419,21 +419,21 @@
   justify-content: center;
 }
 
-.region-cta:hover {
+.offering-cta:hover {
   background-color: var(--dark-brown);
   color: var(--light-text);
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.region-image-large {
+.offering-image-large {
   border-radius: var(--border-radius-medium);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   position: relative;
 }
 
-.region-image-large img {
+.offering-image-large img {
   width: 100%;
   height: 100%;
   min-height: 500px;
@@ -441,7 +441,7 @@
   display: block;
 }
 
-.region-image-caption {
+.offering-image-caption {
   position: absolute;
   left: 0;
   right: 0;
@@ -452,14 +452,14 @@
   text-align: center;
 }
 
-.region-image-caption p {
+.offering-image-caption p {
   margin: 0;
   font-style: italic;
   font-size: 0.9rem;
 }
 
 /* Map Section */
-.regions-map-section {
+.offerings-map-section {
   padding: 7rem 0;
   background-color: var(--background-light);
 }
@@ -668,7 +668,7 @@
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
-  .regions-grid,
+  .offerings-grid,
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
@@ -676,16 +676,16 @@
 }
 
 @media (max-width: 992px) {
-  .region-content {
+  .offering-content {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
   
-  .region-image-large {
+  .offering-image-large {
     order: -1;
   }
   
-  .region-image-large img {
+  .offering-image-large img {
     min-height: 400px;
   }
   
@@ -695,7 +695,7 @@
 }
 
 @media (max-width: 768px) {
-  .regions-hero {
+  .offerings-hero {
     margin-top: -106px;
     min-height: 500px;
   }
@@ -705,13 +705,13 @@
     padding: 0 1.5rem;
   }
   
-  .regions-grid {
+  .offerings-grid {
     grid-template-columns: 1fr;
     max-width: 500px;
     margin: 0 auto;
   }
   
-  .region-card {
+  .offering-card {
     height: 400px;
   }
   
@@ -732,9 +732,9 @@
   }
   
   .intro-section,
-  .regions-gallery,
-  .region-details,
-  .regions-map-section,
+  .offerings-gallery,
+  .offering-details,
+  .offerings-map-section,
   .features-section,
   .cta-section {
     padding: 5rem 0;
@@ -742,26 +742,26 @@
 }
 
 @media (max-width: 576px) {
-  .region-card {
+  .offering-card {
     height: 350px;
   }
   
-  .region-overlay {
+  .offering-overlay {
     padding: 1.5rem;
   }
   
-  .region-overlay h3 {
+  .offering-overlay h3 {
     font-size: 1.8rem;
   }
   
-  .region-preview-desc {
+  .offering-preview-desc {
     font-size: 0.9rem;
     -webkit-line-clamp: 2;
     /* Standard line-clamp for compatibility */
     line-clamp: 2;
   }
   
-  .region-image-large img {
+  .offering-image-large img {
     min-height: 300px;
   }
   
@@ -775,7 +775,7 @@
 }
 
 @media (max-width: 480px) {
-  .regions-hero {
+  .offerings-hero {
     min-height: 450px;
   }
   
@@ -800,18 +800,18 @@
     font-size: 1rem;
   }
   
-  .region-info h2 {
+  .offering-info h2 {
     font-size: 2.2rem;
   }
   
-  .region-description {
+  .offering-description {
     font-size: 1rem;
   }
   
   .intro-section,
-  .regions-gallery,
-  .region-details,
-  .regions-map-section,
+  .offerings-gallery,
+  .offering-details,
+  .offerings-map-section,
   .features-section,
   .cta-section {
     padding: 4rem 0;
@@ -819,12 +819,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .region-card:hover,
+  .offering-card:hover,
   .feature-card:hover {
     transform: none;
   }
   
-  .region-card:hover .region-image img {
+  .offering-card:hover .offering-image img {
     transform: none;
   }
   
@@ -834,8 +834,8 @@
     transform: none;
   }
   
-  .region-card:hover .region-preview-desc,
-  .region-card:hover .region-view-btn {
+  .offering-card:hover .offering-preview-desc,
+  .offering-card:hover .offering-view-btn {
     transition: none;
   }
 }

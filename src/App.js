@@ -21,7 +21,7 @@ function ScrollToTop() {
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
-const Regions = React.lazy(() => import('./pages/Regions'));
+const Offerings = React.lazy(() => import('./pages/Offerings'));
 const Wholesale = React.lazy(() => import('./pages/Wholesale'));
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
             <PageTransition />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/regions" element={<Regions />} />
+              <Route path="/offerings" element={<Offerings />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/wholesale" element={<Wholesale />} />
