@@ -89,7 +89,7 @@ function Home() {
           <p>Premium specialty coffee from the birthplace of Arabica</p>
           <div className="hero-buttons">
             <Link to="/wholesale" className="btn btn-primary">Export Inquiry</Link>
-            <Link to="/offerings" className="btn btn-outline">Explore Origins</Link>
+            <Link to="/offerings" className="btn btn-outline">Explore Offerings</Link>
           </div>
         </div>
       </section>
