@@ -230,6 +230,9 @@
   background-color: var(--light-text);
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .offering-card:hover {
@@ -250,6 +253,9 @@
 
 .offering-content {
   padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .offering-tag {
@@ -270,6 +276,7 @@
 .offering-content p {
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  flex-grow: 1;
 }
 
 /* Values Section */
@@ -602,6 +609,19 @@
   .btn {
     min-width: 140px; /* Ensure buttons have consistent minimum width */
   }
+  
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .offerings-grid {
+    gap: 2.5rem;
+  }
+  
+  .offering-image {
+    height: 250px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -669,8 +689,36 @@
     font-size: 1rem;
   }
   
+  .offerings-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  
+  .offering-card {
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
   .offering-image {
-    height: 200px;
+    height: 220px;
+  }
+  
+  .offering-content h3 {
+    font-size: 1.4rem;
+  }
+  
+  .offering-content {
+    padding: 1.5rem;
+  }
+  
+  .offering-tag {
+    font-size: 0.85rem;
+  }
+  
+  .section-header {
+    margin-bottom: 2rem;
   }
   
   .stat-number {
