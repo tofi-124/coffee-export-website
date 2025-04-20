@@ -86,7 +86,7 @@ function Home() {
         </div>
         <div className="hero-content">
           <h1>Ethiopian Coffee<br />Excellence</h1>
-          <p>Premium specialty coffee from the birthplace of Arabica</p>
+          {/* <p>Premium specialty coffee from the birthplace of Arabica</p> */}
           <div className="hero-buttons">
             <Link to="/wholesale" className="btn btn-primary">Export Inquiry</Link>
             <Link to="/offerings" className="btn btn-outline">Explore Offerings</Link>

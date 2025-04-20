@@ -9,8 +9,8 @@
 /* Hero Section */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 650px;
+  min-height: 600px; /* Consistent min-height across all devices */
+  height: 80vh; /* More consistent proportional height */
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -50,11 +50,14 @@
   margin: 0 auto;
   padding: 0 2.5rem;
   color: var(--light-text);
-  text-align: left;
+  text-align: center; /* Center align all content for consistency */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align for all devices */
 }
 
 .hero-content h1 {
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-size: clamp(2.5rem, 5vw, 5rem); /* More consistent scaling */
   color: var(--light-text);
   margin-bottom: 1.5rem;
   font-weight: 500;
@@ -62,16 +65,20 @@
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.8s ease forwards 0.2s;
+  text-align: center; /* Ensure text is centered */
 }
 
 .hero-content p {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem); /* More consistent scaling */
   color: var(--light-text);
   margin-bottom: 3rem;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.8s ease forwards 0.4s;
-  max-width: 550px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* Ensure text is centered */
 }
 
 .hero-buttons {
@@ -80,11 +87,13 @@
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.8s ease forwards 0.6s;
+  align-items: center;
+  justify-content: center; /* Center buttons for all devices */
 }
 
 /* Story Section */
 .story-section {
-  padding: 8rem 0;
+  padding: 7rem 0; /* Standardize padding for all sections */
   background-color: var(--background-light);
 }
 
@@ -97,6 +106,9 @@
 
 .story-content {
   padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .story-content h2 {
@@ -199,7 +211,7 @@
 
 /* Offerings Section */
 .offerings-section {
-  padding: 8rem 0;
+  padding: 7rem 0; /* Standardize padding for all sections */
   background-color: var(--background-light);
 }
 
@@ -262,7 +274,7 @@
 
 /* Values Section */
 .values-section {
-  padding: 7rem 0;
+  padding: 7rem 0; /* Standardize padding for all sections */
   background-color: var(--primary-color);
   color: var(--light-text);
 }
@@ -306,7 +318,7 @@
 
 /* Testimonials Section */
 .testimonials-section {
-  padding: 7rem 0;
+  padding: 7rem 0; /* Standardize padding for all sections */
   background-color: var(--accent-color);
   color: var(--dark-brown);
 }
@@ -399,7 +411,7 @@
 
 /* Process Section */
 .process-section {
-  padding: 8rem 0;
+  padding: 7rem 0; /* Standardize padding for all sections */
   background-color: var(--background-light);
 }
 
@@ -445,7 +457,7 @@
 /* CTA Section */
 .cta-section {
   position: relative;
-  padding: 8rem 0;
+  padding: 7rem 0; /* Standardize padding for all sections */
   background-color: var(--dark-brown); /* Fallback background color */
   color: var(--light-text);
   text-align: center;
@@ -483,6 +495,14 @@
   z-index: 2;
   max-width: 800px;
   margin: 0 auto;
+}
+
+/* Make CTA buttons consistent across all devices */
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 /* Animations */
@@ -531,6 +551,13 @@
   
   .story-content {
     padding-right: 0;
+    text-align: center;
+    align-items: center; /* Center content on smaller screens */
+  }
+
+  .story-content h2.line-after::after {
+    left: 50%;
+    transform: translateX(-50%); /* Center the line under the heading */
   }
   
   .stats-grid {
@@ -538,66 +565,42 @@
     gap: 2rem;
   }
   
+  /* Make the values grid consistent */
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .offering-image {
-    height: 250px;
+    gap: 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .hero {
     margin-top: -106px; /* Adjusted for smaller header */
-    height: 100vh;
-    justify-content: center;
+    min-height: 550px; /* Maintain reasonable height on mobile */
   }
   
   .hero-content {
-    text-align: center;
     padding: 0 1.5rem;
   }
   
-  .hero-content p {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
   .hero-buttons {
+    flex-direction: row; /* Keep buttons side by side on all devices */
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
     justify-content: center;
+    gap: 1rem; /* Slightly smaller gap on mobile */
   }
   
-  .offerings-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  
-  .process-steps {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .testimonial-quote p {
-    font-size: 1.2rem;
-  }
-  
-  .cta-buttons {
-    flex-direction: column;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  
+  /* Other sections consistent padding */
   .story-section,
   .offerings-section,
   .process-section,
   .values-section,
-  .testimonials-section {
+  .testimonials-section,
+  .cta-section {
     padding: 5rem 0;
   }
   
-  .cta-section {
-    padding: 5rem 0;
+  .btn {
+    min-width: 140px; /* Ensure buttons have consistent minimum width */
   }
 }
 
@@ -619,6 +622,19 @@
   
   .offering-content {
     padding: 1.8rem;
+  }
+
+  .hero-buttons,
+  .cta-buttons {
+    flex-direction: column;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  
+  .btn {
+    width: 100%; /* Full-width buttons on very small screens */
   }
 }
 
